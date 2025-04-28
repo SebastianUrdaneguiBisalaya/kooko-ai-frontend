@@ -4,9 +4,14 @@ type CardDetailLandingPageProps = {
 	total: string,
 }
 
-export default function CardDetailLandingPage({ title, total }: CardDetailLandingPageProps) {
+export default function CardDetailLandingPage({ id, title, total }: CardDetailLandingPageProps) {
+	const animate: Record<number, string> = {
+		1: "animate-delay-[1200ms]",
+		2: "animate-delay-[1600ms]",
+		3: "animate-delay-[2000ms]",
+	}
 	return (
-		<div className="bg-dark w-full rounded-xl px-4 py-2 flex flex-col gap-2">
+		<div className={`bg-dark w-full rounded-xl px-4 py-2 flex flex-col gap-2 animate-fade-in-up ${animate[id]}`}>
 			<p className="text-gray-200 font-semibold text-md">
 				{title}
 			</p>

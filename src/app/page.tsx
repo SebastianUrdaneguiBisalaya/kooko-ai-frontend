@@ -29,13 +29,13 @@ export default function Home() {
 			<main className="flex w-full h-full justify-center items-center grow">
 				<div className="flex flex-row gap-6 w-full h-full py-4">
 					<div className="basis-[70%] flex flex-col gap-6">
-						<h1 className="text-white text-5xl font-bold">
+						<h1 className="text-white text-5xl font-bold animate-zoom-in">
 							¿Cansado de registrar los comprobantes manualemente?
 						</h1>
-						<h2 className="text-white text-xl font-light">
+						<h2 className="text-white text-xl font-light animate-zoom-in animate-delay-400">
 							Olvídate del papeleo. Envía una foto a nuestro chat de Telegram, el modelo de IA extrae los datos y los tienes disponibles en tu panel web. <span className="font-semibold">¡Inscríbete y obtén acceso prioritario!</span>
 						</h2>
-						<div className="flex flex-col gap-3">
+						<div className="flex flex-col gap-3 animate-zoom-in animate-delay-800">
 								<label
 									htmlFor="join-waitlist"
 									className="text-gray-400 text-sm font-medium"
@@ -70,7 +70,7 @@ export default function Home() {
 								}
 							</div>
 							<div className="flex flex-col gap-3 w-full">
-								<div className="flex flex-col justify-between bg-gray/10 w-full h-full rounded-xl p-4">
+								<div className="flex flex-col justify-between bg-gray/10 w-full h-full rounded-xl p-4 animate-fade-in-down animate-delay-[2000ms]">
 									<p className="text-gray-200 font-semibold text-md">
 										Total
 									</p>
@@ -86,7 +86,7 @@ export default function Home() {
 										<span className="text-gray-400 font-semibold text-sm">25%<span className="font-normal"> al mes anterior</span></span>
 									</div>
 								</div>
-								<div className="relative bg-dark w-full rounded-xl h-full overflow-hidden">
+								<div className="relative bg-dark w-full rounded-xl h-full overflow-hidden animate-fade-in-up animate-delay-[2000ms]">
 									<div className="flex flex-col p-4">
 										<p className="text-gray-200 font-semibold text-md">
 											Comportamiento
@@ -104,7 +104,7 @@ export default function Home() {
 						</div>
 					</div>
 					<div className="basis-[30%]">
-						<div className="flex flex-col w-full h-full bg-[url('/grid.png')] bg-cover bg-center rounded-xl overflow-hidden border border-gray-700 shadow-2xl shadow-gray-900">
+						<div className="flex flex-col w-full h-full bg-[url('/grid.png')] bg-cover bg-center rounded-xl overflow-hidden border border-gray-700 shadow-2xl shadow-gray-900 animate-fade-in-left animate-delay-[2000ms]">
 							
 						</div>
 					</div>
