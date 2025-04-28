@@ -33,7 +33,7 @@ export default function Home() {
 							¿Cansado de registrar los comprobantes manualemente?
 						</h1>
 						<h2 className="text-white text-xl font-light">
-							Olvídate del papeleo y los errores. Envía una foto a nuestro chat de Telegram, el modelo de IA extrae los datos y los tienes disponibles en tu panel web. <span className="font-semibold">¡Inscríbete y obtén acceso prioritario!</span>
+							Olvídate del papeleo. Envía una foto a nuestro chat de Telegram, el modelo de IA extrae los datos y los tienes disponibles en tu panel web. <span className="font-semibold">¡Inscríbete y obtén acceso prioritario!</span>
 						</h2>
 						<div className="flex flex-col gap-3">
 								<label
