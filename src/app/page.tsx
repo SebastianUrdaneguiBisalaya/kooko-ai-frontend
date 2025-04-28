@@ -1,5 +1,10 @@
+"use client";
+
+import { useState, useRef } from "react";
 import Image from "next/image";
 import CardDetailLandingPage from "@/components/card-detail-landing-page";
+import ModalJoinWaitlist from "@/components/modal-join-waitlist";
+import ModalCredit from "@/components/modal-credits";
 
 const dataCardDetail = [
 	{
@@ -20,6 +25,39 @@ const dataCardDetail = [
 ]
 
 export default function Home() {
+	const [isModalCredit, setIsModalCredit] = useState<boolean>(false);
+	const [isModalJoinWaitlist, setIsModalJoinWaitlist] = useState<boolean>(false);
+	const [triggerPosition, setTriggerPosition] = useState<{ x: number, y: number } | undefined>(undefined);
+	const openButtonRef = useRef<HTMLButtonElement>(null);
+
+	const handleOpenModalCredit = (event: React.MouseEvent<HTMLButtonElement>) => {
+		const rect = event.currentTarget.getBoundingClientRect();
+		setTriggerPosition({
+			x: rect.left + rect.width / 2,
+			y: rect.top + rect.height / 2,
+		});
+		setIsModalCredit(true);
+	}
+
+	const handleCloseModalCredit = () => {
+		setIsModalCredit(false);
+		setTriggerPosition(undefined);
+	}
+
+	const handleOpenModalJoinWaitlist = (event: React.MouseEvent<HTMLButtonElement>) => {
+		const rect = event.currentTarget.getBoundingClientRect();
+		setTriggerPosition({
+			x: rect.left + rect.width / 2,
+			y: rect.top + rect.height / 2,
+		});
+		setIsModalJoinWaitlist(true);
+	}
+
+	const handleCloseModalJoinWaitlist = () => {
+		setIsModalJoinWaitlist(false);
+		setTriggerPosition(undefined);
+	}
+
   return (
     <div className="flex flex-col w-full h-full min-h-screen max-w-6xl px-4">
 			<header className="flex flex-row items-center gap-2 w-full py-4">
@@ -45,11 +83,13 @@ export default function Home() {
 								<div className="flex flex-row gap-4 w-full">
 									<input
 										id="join-waitlist"
-										type="text"
+										type="email"
 										placeholder="sebas@gmail.com"
 										className="max-w-80 w-full p-3 !border !border-gray-400 text-md text-white bg-background rounded-lg focus:ring-0 focus:outline-0 placeholder-gray-400"
 									/>
 									<button
+										type="button"
+										onClick={handleOpenModalJoinWaitlist}
 										className="bg-green rounded-full flex flex-col justify-center items-center cursor-pointer"
 									>
 										<svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" viewBox="0 0 24 24"><path fill="#000000" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/></svg>
@@ -119,20 +159,43 @@ export default function Home() {
 					<p className="text-lg text-white font-semibold">Contacto</p>
 					<a
 						href=""
-						className="flex flex-row gap-3 items-center cursor-pointer"
+						className="flex flex-row gap-3 items-center cursor-pointer hover:underline hover:text-white"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#E0F15B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m3 7l9 6l9-6"/></g></svg>
 					  <p className="text-md text-gray-300">sebasurdanegui@gmail.com</p>
 					</a>
+					<a
+						href=""
+						target="_blank"
+						className="flex flex-row gap-3 items-center cursor-pointer hover:underline hover:text-white"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#E0F15B" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
+						<p className="text-md text-gray-300">in/sebastianurdaneguibisalaya</p>
+					</a>
 				</div>
 				<div className="flex flex-col gap-3">
 					<p className="text-lg text-white font-semibold">Founder</p>
-					<div className="flex flex-row gap-3 items-center cursor-pointer">
+					<button
+						ref={openButtonRef}
+						type="button"
+						onClick={handleOpenModalCredit}
+						className="flex flex-row gap-3 items-center cursor-pointer"
+					>
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#E0F15B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></g></svg>
 					  <p className="text-md text-gray-300">Créditos</p>
-					</div>
+					</button>
 				</div>
 			</footer>
+			<ModalCredit
+				isOpen={isModalCredit}
+				onClose={handleCloseModalCredit}
+				triggerPosition={triggerPosition}
+			/>
+			<ModalJoinWaitlist
+				isOpen={isModalJoinWaitlist}
+				onClose={handleCloseModalJoinWaitlist}
+				triggerPosition={triggerPosition}
+			/>
     </div>	
   );
 }
