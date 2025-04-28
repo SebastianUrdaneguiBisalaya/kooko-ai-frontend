@@ -29,6 +29,7 @@ export default function Home() {
 	const [isModalJoinWaitlist, setIsModalJoinWaitlist] = useState<boolean>(false);
 	const [triggerPosition, setTriggerPosition] = useState<{ x: number, y: number } | undefined>(undefined);
 	const [email, setEmail] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const openButtonRef = useRef<HTMLButtonElement>(null);
 
 	const handleOpenModalCredit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,6 +53,7 @@ export default function Home() {
 	}
 
 	const handleSubmitJoinWaitlist = async (event: React.MouseEvent<HTMLButtonElement>) => {
+		setIsLoading(true);
 		const response = await fetch("/api/joinwaitlist", {
 			method: "POST",
 			headers: {
@@ -68,6 +70,8 @@ export default function Home() {
 			console.error("Hubo un problema con la solicitud al servidor", error);
 			alert("Hubo un problema con la solicitud al servidor. Por favor, inténtalo de nuevo más tarde.");
 			return;
+		} finally {
+			setIsLoading(false);
 		}
 		if (!response.ok) {
 			const error = await response.json();
@@ -119,7 +123,13 @@ export default function Home() {
 										onClick={handleSubmitJoinWaitlist}
 										className="bg-green rounded-full flex flex-col justify-center items-center cursor-pointer"
 									>
-										<svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" viewBox="0 0 24 24"><path fill="#000000" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/></svg>
+										{
+											isLoading ? (
+												<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#000000" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5"/><path fill="#000000" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
+											) : (
+												<svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" viewBox="0 0 24 24"><path fill="#000000" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/></svg>
+											)
+										}
 									</button>
 								</div>
 						</div>
