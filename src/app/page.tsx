@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import CardDetailLandingPage from "@/components/card-detail-landing-page";
 import ModalJoinWaitlist from "@/components/modal-join-waitlist";
@@ -28,6 +28,7 @@ export default function Home() {
 	const [isModalCredit, setIsModalCredit] = useState<boolean>(false);
 	const [isModalJoinWaitlist, setIsModalJoinWaitlist] = useState<boolean>(false);
 	const [triggerPosition, setTriggerPosition] = useState<{ x: number, y: number } | undefined>(undefined);
+	const [email, setEmail] = useState<string | null>(null);
 	const openButtonRef = useRef<HTMLButtonElement>(null);
 
 	const handleOpenModalCredit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,18 +45,43 @@ export default function Home() {
 		setTriggerPosition(undefined);
 	}
 
-	const handleOpenModalJoinWaitlist = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+	const handleCloseModalJoinWaitlist = () => {
+		setIsModalJoinWaitlist(false);
+		setTriggerPosition(undefined);
+	}
+
+	const handleSubmitJoinWaitlist = async (event: React.MouseEvent<HTMLButtonElement>) => {
+		const response = await fetch("/api/joinwaitlist", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				email: email,
+			}),
+		});
+		let data;
+		try {
+			data = await response.json();
+		} catch (error: unknown) {
+			console.error("Hubo un problema con la solicitud al servidor", error);
+			alert("Hubo un problema con la solicitud al servidor. Por favor, inténtalo de nuevo más tarde.");
+			return;
+		}
+		if (!response.ok) {
+			const error = await response.json();
+			console.error("Error en la respuesta a la solicitud.", error);
+			alert("Hubo un problema con la solicitud al servidor. Por favor, inténtalo de nuevo más tarde.");
+			return;
+		}
+		console.log(data);
 		const rect = event.currentTarget.getBoundingClientRect();
 		setTriggerPosition({
 			x: rect.left + rect.width / 2,
 			y: rect.top + rect.height / 2,
 		});
 		setIsModalJoinWaitlist(true);
-	}
-
-	const handleCloseModalJoinWaitlist = () => {
-		setIsModalJoinWaitlist(false);
-		setTriggerPosition(undefined);
 	}
 
   return (
@@ -85,11 +111,12 @@ export default function Home() {
 										id="join-waitlist"
 										type="email"
 										placeholder="sebas@gmail.com"
+										onChange={(event) => setEmail(event.target.value)}
 										className="max-w-80 w-full p-3 !border !border-gray-400 text-md text-white bg-background rounded-lg focus:ring-0 focus:outline-0 placeholder-gray-400"
 									/>
 									<button
 										type="button"
-										onClick={handleOpenModalJoinWaitlist}
+										onClick={handleSubmitJoinWaitlist}
 										className="bg-green rounded-full flex flex-col justify-center items-center cursor-pointer"
 									>
 										<svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" viewBox="0 0 24 24"><path fill="#000000" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/></svg>
