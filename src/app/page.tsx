@@ -5,6 +5,7 @@ import Image from "next/image";
 import CardDetailLandingPage from "@/components/card-detail-landing-page";
 import ModalJoinWaitlist from "@/components/modal-join-waitlist";
 import ModalCredit from "@/components/modal-credits";
+import { validateEmailJoinWaitlist } from "@/utils/validate-email-joinwaitlist";
 
 const dataCardDetail = [
 	{
@@ -30,6 +31,7 @@ export default function Home() {
 	const [triggerPosition, setTriggerPosition] = useState<{ x: number, y: number } | undefined>(undefined);
 	const [email, setEmail] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const openButtonRef = useRef<HTMLButtonElement>(null);
 
 	const handleOpenModalCredit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -53,6 +55,11 @@ export default function Home() {
 	}
 
 	const handleSubmitJoinWaitlist = async (event: React.MouseEvent<HTMLButtonElement>) => {
+		if (!email) return;
+		if (!validateEmailJoinWaitlist(email)) {
+			setErrorMessage("El correo introducido no es válido.");
+			return;
+		}
 		setIsLoading(true);
 		const response = await fetch("/api/joinwaitlist", {
 			method: "POST",
@@ -132,6 +139,7 @@ export default function Home() {
 										}
 									</button>
 								</div>
+								<p className="text-green font-semibold text-md">{errorMessage}</p>
 						</div>
 						<div className="flex flex-row w-full gap-3">
 							<div className="flex flex-col gap-2 w-full bg-gray/10 rounded-xl p-4 backdrop-blur-2xl mask-fade-bottom">
