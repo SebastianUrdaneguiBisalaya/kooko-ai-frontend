@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import CardDetailLandingPage from "@/components/card-detail-landing-page";
 import ModalJoinWaitlist from "@/components/modal-join-waitlist";
@@ -32,6 +32,7 @@ export default function Home() {
 	const [email, setEmail] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const videoRef = useRef<HTMLVideoElement>(null);
 	const openButtonRef = useRef<HTMLButtonElement>(null);
 
 	const handleOpenModalCredit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -96,6 +97,12 @@ export default function Home() {
 			setErrorMessage(null);
 		}
 	}
+
+	useEffect(() => {
+		if (videoRef.current) {
+			videoRef.current.playbackRate = 2;
+		}
+	}, []);
 
   return (
     <div className="flex flex-col w-full h-full min-h-screen max-w-6xl px-4">
@@ -192,7 +199,17 @@ export default function Home() {
 					</div>
 					<div className="basis-[30%]">
 						<div className="flex flex-col w-full h-full bg-[url('/grid.png')] bg-cover bg-center rounded-xl overflow-hidden border border-gray-700 shadow-2xl shadow-gray-900 animate-fade-in-left animate-delay-[2000ms]">
-							
+							<div className="w-full h-full rounded-xl border border-gray-200 p-4">
+								<video
+									ref={videoRef}
+									autoPlay
+									loop
+									muted
+									className="w-full h-full rounded-xl"
+								>
+									<source src="https://res.cloudinary.com/drzumfcdp/video/upload/Landing%20Page%20Sebastian/demo-kooko.ai_ql0maz.mp4" type="video/mp4" />
+								</video>
+							</div>
 						</div>
 					</div>
 				</div>
