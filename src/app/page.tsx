@@ -108,15 +108,15 @@ export default function Home() {
     <div className="flex flex-col w-full h-full min-h-screen max-w-6xl px-4">
 			<header className="flex flex-row items-center gap-2 w-full py-4">
 				<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512"><path fill="#ffffff" d="M179.125 20.625c-28.052.12-54.046 5.813-66.72 9.78c0 0 114.968 19.51 124.532 98.876C149.573 3.32 54.28 155.657 54.28 155.657c19.868-5.212 76.76-20.682 114.75-14.156c25.992 4.465 51.33 28.03 50.236 27.733c-61.943 15.24-160.35 290.92-143.64 313.308c14.9 17.12 29.816 11.28 44.718 2.595c7.376-58.425 64.938-314.765 135.375-294.072c.01.003.02-.003.03 0c5.93 2.03 11.54 5.59 11.844 11.03c.58 10.363-6.11 27.3-4.53 39.063c3.662 27.296 9.007 36.79 16.78 46.313c18.564-10.435 36.326-48.057 40-67.564c16.634 7.284 43.373 24.155 65.187 86.813c11.404-58.716-5.042-105.03-59.03-125.595c23.38-10.105 125.142 41.03 137.563 69.53C475.648 199.264 390.167 136.378 319 139.72c13.644-3.56 28.638.6 42.906-9.907c19.146-14.098 41.474-26.24 62.28-39.282c-69.972-30.435-134.545-15.407-139.092 16.095c-3.573-69.916-57.83-86.204-105.97-86z"/></svg>
-				<span className="text-white text-2xl font-semibold">kooko.ai</span>
+				<span className="text-white text-base sm:text-2xl font-semibold">kooko.ai</span>
 			</header>
 			<main className="flex w-full h-full justify-center items-center grow">
-				<div className="flex flex-row gap-6 w-full h-full py-4">
+				<div className="flex flex-col lg:flex-row gap-6 w-full h-full py-4">
 					<div className="basis-[70%] flex flex-col gap-6">
-						<h1 className="text-white text-5xl font-bold animate-zoom-in">
+						<h1 className="text-white text-3xl sm:text-5xl font-bold animate-zoom-in">
 							¿Cansado de registrar los comprobantes manualemente?
 						</h1>
-						<h2 className="text-white text-xl font-light animate-zoom-in animate-delay-400">
+						<h2 className="text-white text-base sm:text-xl font-light animate-zoom-in animate-delay-400">
 							Olvídate del papeleo. Envía una foto a nuestro chat de Telegram, el modelo de IA extrae los datos y los tienes disponibles en tu panel web. <span className="font-semibold">¡Inscríbete y obtén acceso prioritario!</span>
 						</h2>
 						<div className="flex flex-col gap-3 animate-zoom-in animate-delay-800">
@@ -132,7 +132,7 @@ export default function Home() {
 										type="email"
 										placeholder="sebas@gmail.com"
 										onChange={(event) => setEmail(event.target.value)}
-										className="max-w-80 w-full p-3 !border !border-gray-400 text-md text-white bg-background rounded-lg focus:ring-0 focus:outline-0 placeholder-gray-400"
+										className="max-w-80 w-full p-3 !border !border-gray-400 text-base text-white bg-background rounded-lg focus:ring-0 focus:outline-0 placeholder-gray-400"
 									/>
 									<button
 										type="button"
@@ -148,9 +148,9 @@ export default function Home() {
 										}
 									</button>
 								</div>
-								<p className="text-gray-300 font-semibold text-md">{errorMessage}</p>
+								<p className="text-gray-300 font-semibold text-base">{errorMessage}</p>
 						</div>
-						<div className="flex flex-row w-full gap-3">
+						<div className="flex flex-col sm:flex-row w-full gap-3">
 							<div className="flex flex-col gap-2 w-full bg-gray/10 rounded-xl p-4 backdrop-blur-2xl mask-fade-bottom">
 								{
 									dataCardDetail.map((item) => (
@@ -165,24 +165,24 @@ export default function Home() {
 							</div>
 							<div className="flex flex-col gap-3 w-full">
 								<div className="flex flex-col justify-between bg-gray/10 w-full h-full rounded-xl p-4 animate-fade-in-down animate-delay-[2000ms]">
-									<p className="text-gray-200 font-semibold text-md">
+									<p className="text-gray-200 font-semibold text-sm sm:text-base">
 										Total
 									</p>
 									<div className="flex flex-row justify-between items-center gap-2">
 										<span className="text-gray-400 font-normal text-xs">Egreso del mes</span>
 										<span className="text-gray-400 font-normal text-xs">05/2025</span>
 									</div>
-									<p className="text-white font-extrabold text-2xl">S/. 1,950.00</p>
+									<p className="text-white font-extrabold text-xl sm:text-2xl">S/. 1,950.00</p>
 									<div className="flex flex-row items-end gap-4">
 										<div className="flex flex-col justify-center items-center">
 											<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 16"><path fill="#E0F15B" d="M5 11h3v5H5zm-4 3h3v2H1zm12-2h3v4h-3zM9 9h3v7H9zm7-8.93l-5.68 4.97l-5.47-1.7L0 7.1V9l5.15-4l5.53 1.72L16 2.06z"/></svg>
 										</div>
-										<span className="text-gray-400 font-semibold text-sm">25%<span className="font-normal"> al mes anterior</span></span>
+										<span className="text-gray-400 font-semibold text-xs sm:text-sm">25%<span className="font-normal"> al mes anterior</span></span>
 									</div>
 								</div>
-								<div className="relative bg-dark w-full rounded-xl h-full overflow-hidden animate-fade-in-up animate-delay-[2000ms]">
+								<div className="relative bg-dark w-full rounded-xl h-full overflow-hidden animate-fade-in-up animate-delay-[2000ms] min-h-32">
 									<div className="flex flex-col p-4">
-										<p className="text-gray-200 font-semibold text-md">
+										<p className="text-gray-200 font-semibold text-sm sm:text-base">
 											Comportamiento
 										</p>
 										<span className="text-gray-400 font-normal text-xs">Mensual de Egresos</span>
@@ -197,9 +197,9 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
-					<div className="basis-[30%]">
-						<div className="flex flex-col w-full h-full bg-[url('/grid.png')] bg-cover bg-center rounded-xl overflow-hidden border border-gray-700 shadow-2xl shadow-gray-900 animate-fade-in-left animate-delay-[2000ms]">
-							<div className="w-full h-full rounded-xl border border-gray-200 p-4">
+					<div className="basis-[30%] self-center">
+						<div className="flex flex-col min-w-40 max-w-80 w-full h-fit lg:w-full lg:h-full bg-[url('/grid.png')] bg-cover bg-center rounded-xl overflow-hidden border border-gray-700 shadow-2xl shadow-gray-900 animate-fade-in-left animate-delay-[2000ms]">
+							<div className="w-full h-full rounded-xl border border-gray-500 p-4">
 								<video
 									ref={videoRef}
 									autoPlay
@@ -214,19 +214,19 @@ export default function Home() {
 					</div>
 				</div>
 			</main>
-			<footer className="flex flex-row justify-between items-start gap-4 w-full py-4">
+			<footer className="flex flex-col sm:flex-row justify-between items-start gap-4 w-full py-4">
 				<div className="flex flex-row items-center justify-start gap-2 py-4">
 					<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512"><path fill="#ffffff" d="M179.125 20.625c-28.052.12-54.046 5.813-66.72 9.78c0 0 114.968 19.51 124.532 98.876C149.573 3.32 54.28 155.657 54.28 155.657c19.868-5.212 76.76-20.682 114.75-14.156c25.992 4.465 51.33 28.03 50.236 27.733c-61.943 15.24-160.35 290.92-143.64 313.308c14.9 17.12 29.816 11.28 44.718 2.595c7.376-58.425 64.938-314.765 135.375-294.072c.01.003.02-.003.03 0c5.93 2.03 11.54 5.59 11.844 11.03c.58 10.363-6.11 27.3-4.53 39.063c3.662 27.296 9.007 36.79 16.78 46.313c18.564-10.435 36.326-48.057 40-67.564c16.634 7.284 43.373 24.155 65.187 86.813c11.404-58.716-5.042-105.03-59.03-125.595c23.38-10.105 125.142 41.03 137.563 69.53C475.648 199.264 390.167 136.378 319 139.72c13.644-3.56 28.638.6 42.906-9.907c19.146-14.098 41.474-26.24 62.28-39.282c-69.972-30.435-134.545-15.407-139.092 16.095c-3.573-69.916-57.83-86.204-105.97-86z"/></svg>
-					<span className="text-white text-2xl font-semibold">kooko.ai</span>
+					<span className="text-white text-base sm:text-2xl font-semibold">kooko.ai</span>
 				</div>
 				<div className="flex flex-col gap-3">
-					<p className="text-lg text-white font-semibold">Contacto</p>
+					<p className="text-base sm:text-lg text-white font-semibold">Contacto</p>
 					<a
 						href=""
 						className="flex flex-row gap-3 items-center cursor-pointer hover:underline hover:text-white"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#E0F15B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m3 7l9 6l9-6"/></g></svg>
-					  <p className="text-md text-gray-300">sebasurdanegui@gmail.com</p>
+					  <span className="text-sm sm:text-base text-gray-300">sebasurdanegui@gmail.com</span>
 					</a>
 					<a
 						href=""
@@ -234,11 +234,11 @@ export default function Home() {
 						className="flex flex-row gap-3 items-center cursor-pointer hover:underline hover:text-white"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#E0F15B" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
-						<p className="text-md text-gray-300">in/sebastianurdaneguibisalaya</p>
+						<span className="text-sm sm:text-base text-gray-300">in/sebastianurdaneguibisalaya</span>
 					</a>
 				</div>
 				<div className="flex flex-col gap-3">
-					<p className="text-lg text-white font-semibold">Founder</p>
+					<p className="text-base sm:text-lg text-white font-semibold">Founder</p>
 					<button
 						ref={openButtonRef}
 						type="button"
@@ -246,7 +246,7 @@ export default function Home() {
 						className="flex flex-row gap-3 items-center cursor-pointer"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#E0F15B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></g></svg>
-					  <p className="text-md text-gray-300">Créditos</p>
+					  <span className="text-sm sm:text-base text-gray-300">Créditos</span>
 					</button>
 				</div>
 			</footer>
