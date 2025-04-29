@@ -59,7 +59,7 @@ export default function Home() {
 		const button = event.currentTarget;
 		if (!email) return;
 		if (!validateEmailJoinWaitlist(email)) {
-			setErrorMessage("El correo introducido no es válido.");
+			setErrorMessage("El correo ingresado no es válido.");
 			return;
 		}
 		setIsLoading(true);
@@ -221,15 +221,14 @@ export default function Home() {
 				</div>
 				<div className="flex flex-col gap-3">
 					<p className="text-base sm:text-lg text-white font-semibold">Contacto</p>
-					<a
-						href=""
-						className="flex flex-row gap-3 items-center cursor-pointer hover:underline hover:text-white"
+					<p
+						className="flex flex-row gap-3 items-center"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#E0F15B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="m3 7l9 6l9-6"/></g></svg>
 					  <span className="text-sm sm:text-base text-gray-300">sebasurdanegui@gmail.com</span>
-					</a>
+					</p>
 					<a
-						href=""
+						href="https://www.linkedin.com/in/sebastianurdaneguibisalaya/"
 						target="_blank"
 						className="flex flex-row gap-3 items-center cursor-pointer hover:underline hover:text-white"
 					>

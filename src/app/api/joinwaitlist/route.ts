@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import { validateEmailJoinWaitlist } from "@/utils/validate-email-joinwaitlist";
 
 export async function POST(request: NextRequest) {
   const token = process.env.API_KEY_ZOOTOOLS;
@@ -23,6 +24,17 @@ export async function POST(request: NextRequest) {
   if (!user.email) {
     return new Response(
       JSON.stringify({ error: "El campo 'email' es requerido." }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+  if (!validateEmailJoinWaitlist(user.email)) {
+    return new Response(
+      JSON.stringify({ error: "El correo ingresado no es válido." }),
       {
         status: 400,
         headers: {
