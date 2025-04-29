@@ -114,10 +114,10 @@ export default function Home() {
 				<div className="flex flex-col lg:flex-row gap-6 w-full h-full py-4">
 					<div className="basis-[70%] flex flex-col gap-6">
 						<h1 className="text-white text-3xl sm:text-5xl font-bold animate-zoom-in">
-							¿Cansado de registrar los comprobantes manualemente?
+							¿Cansado de registrar los comprobantes manualmente?
 						</h1>
 						<h2 className="text-white text-base sm:text-xl font-light animate-zoom-in animate-delay-400">
-							Olvídate del papeleo. Envía una foto a nuestro chat de Telegram, el modelo de IA extrae los datos y los tienes disponibles en tu panel web. <span className="font-semibold">¡Inscríbete y obtén acceso prioritario!</span>
+							Olvídate del papeleo. Envía una foto a nuestro chat de Telegram, el modelo de AI extrae los datos y los tienes disponibles en tu panel web. <span className="font-semibold">¡Inscríbete y obtén acceso prioritario!</span>
 						</h2>
 						<div className="flex flex-col gap-3 animate-zoom-in animate-delay-800">
 								<label
