@@ -6,15 +6,27 @@ export async function POST(request: NextRequest) {
   try {
     user = await request.json();
   } catch (error: unknown) {
-    console.error(error);
     return new Response(
-      JSON.stringify({ error: "Error al parsear el cuerpo del JSON." }),
+      JSON.stringify({
+        error: `Error al parsear el cuerpo del JSON. ${error}`,
+      }),
       {
         status: 400,
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Methods": "POST",
           "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        },
+      }
+    );
+  }
+  if (!user.email) {
+    return new Response(
+      JSON.stringify({ error: "El campo 'email' es requerido." }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
         },
       }
     );
@@ -37,19 +49,19 @@ export async function POST(request: NextRequest) {
     const data = await response.json();
     return new Response(JSON.stringify(data), {
       status: response.status,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   } catch (error: unknown) {
-    console.error("Error en la solicitud API.", error);
     return new Response(
       JSON.stringify({
-        error: "Error en la solicitud API.",
+        error: `Error en la solicitud API. ${error}`,
       }),
       {
-        status: 400,
+        status: 500,
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Methods": "POST",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
         },
       }
     );

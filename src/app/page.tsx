@@ -55,6 +55,7 @@ export default function Home() {
 	}
 
 	const handleSubmitJoinWaitlist = async (event: React.MouseEvent<HTMLButtonElement>) => {
+		const button = event.currentTarget;
 		if (!email) return;
 		if (!validateEmailJoinWaitlist(email)) {
 			setErrorMessage("El correo introducido no es válido.");
@@ -74,25 +75,26 @@ export default function Home() {
 		try {
 			data = await response.json();
 		} catch (error: unknown) {
-			console.error("Hubo un problema con la solicitud al servidor", error);
+			setErrorMessage(`Hubo un problema con la solicitud al servidor. Por favor, inténtalo de nuevo más tarde. ${error}`);
 			alert("Hubo un problema con la solicitud al servidor. Por favor, inténtalo de nuevo más tarde.");
 			return;
 		} finally {
 			setIsLoading(false);
 		}
 		if (!response.ok) {
-			const error = await response.json();
-			console.error("Error en la respuesta a la solicitud.", error);
+			setErrorMessage("Hubo un problema con la solicitud al servidor. Por favor, inténtalo de nuevo más tarde.");
 			alert("Hubo un problema con la solicitud al servidor. Por favor, inténtalo de nuevo más tarde.");
 			return;
 		}
-		console.log(data);
-		const rect = event.currentTarget.getBoundingClientRect();
-		setTriggerPosition({
-			x: rect.left + rect.width / 2,
-			y: rect.top + rect.height / 2,
-		});
-		setIsModalJoinWaitlist(true);
+		if (data.contact.id) {
+			const rect = button.getBoundingClientRect();
+			setTriggerPosition({
+				x: rect.left + rect.width / 2,
+				y: rect.top + rect.height / 2,
+			});
+			setIsModalJoinWaitlist(true);
+			setErrorMessage(null);
+		}
 	}
 
   return (
@@ -132,14 +134,14 @@ export default function Home() {
 									>
 										{
 											isLoading ? (
-												<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#000000" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5"/><path fill="#000000" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
+												<svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" viewBox="0 0 24 24"><path fill="#000000" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5"/><path fill="#000000" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
 											) : (
 												<svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" viewBox="0 0 24 24"><path fill="#000000" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/></svg>
 											)
 										}
 									</button>
 								</div>
-								<p className="text-green font-semibold text-md">{errorMessage}</p>
+								<p className="text-gray-300 font-semibold text-md">{errorMessage}</p>
 						</div>
 						<div className="flex flex-row w-full gap-3">
 							<div className="flex flex-col gap-2 w-full bg-gray/10 rounded-xl p-4 backdrop-blur-2xl mask-fade-bottom">
