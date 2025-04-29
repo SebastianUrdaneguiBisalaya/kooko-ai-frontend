@@ -205,6 +205,7 @@ export default function Home() {
 									autoPlay
 									loop
 									muted
+									playsInline
 									className="w-full h-full rounded-xl"
 								>
 									<source src="https://res.cloudinary.com/drzumfcdp/video/upload/Landing%20Page%20Sebastian/demo-kooko.ai_ql0maz.mp4" type="video/mp4" />
