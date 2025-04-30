@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ReactQueryClientProvider } from "@/providers/ReactQueryClientProvider";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 
@@ -19,12 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${bricolageGrotesque.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ReactQueryClientProvider>
+			<html lang="en">
+				<body
+					className={`${bricolageGrotesque.variable} antialiased`}
+				>
+					{children}
+				</body>
+			</html>
+		</ReactQueryClientProvider>
   );
 }
