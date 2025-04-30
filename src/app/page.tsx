@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import CardDetailLandingPage from "@/components/card-detail-landing-page";
 import ModalJoinWaitlist from "@/components/modal-join-waitlist";
 import ModalCredit from "@/components/modal-credits";
@@ -107,8 +108,14 @@ export default function Home() {
 
   return (
     <div className="flex flex-col w-full h-full min-h-screen max-w-6xl px-4">
-			<header className="flex items-center w-full py-4">
+			<header className="flex justify-between items-center w-full py-4">
 				<Icon />
+				<Link
+					href="/auth"
+					className="bg-blue-dark group hover:bg-green border border-green px-3 py-2 rounded-lg flex flex-row justify-center items-center cursor-pointer backdrop-blur-2xl"
+				>
+					<span className="text-white group-hover:text-blue-dark text-base md:text-md font-medium">Iniciar Sesión</span>
+				</Link>
 			</header>
 			<main className="flex w-full h-full justify-center items-center grow">
 				<div className="flex flex-col lg:flex-row gap-6 w-full h-full py-4">
@@ -197,7 +204,7 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
-					<div className="basis-[30%] self-center">
+					<div className="basis-[30%] flex flex-col justify-end items-center lg:items-end">
 						<div className="flex flex-col min-w-40 max-w-80 w-full h-fit lg:w-full lg:h-full bg-[url('/grid.png')] bg-cover bg-center rounded-xl overflow-hidden border border-gray-700 shadow-2xl shadow-gray-900 animate-fade-in-left animate-delay-[2000ms]">
 							<div className="w-full h-full rounded-xl border border-gray-500 p-4">
 								<video
