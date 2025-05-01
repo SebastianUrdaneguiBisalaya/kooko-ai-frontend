@@ -5,6 +5,7 @@ import UserProfile from "@/components/home/user-profile";
 import Breadcrumbs from "@/components/home/breadcrumbs";
 import Table from "@/components/home/table";
 import CardAnalytics from "@/components/home/card-analytics";
+import TagDate from "@/components/home/tag-date";
 
 const dataCardDetail = [
 	 {
@@ -65,6 +66,15 @@ const dataCardDetail = [
 	 }
 ]
 
+const tags = [
+	{id: 1, date: "Hoy"},
+	{id: 2, date: "Ayer"},
+	{id: 3, date: "7 días"},
+	{id: 4, date: "1 mes"},
+	{id: 5, date: "3 meses"},
+	{id: 6, date: "6 meses"},
+]
+
 export default function Home() {
 	return (
 		<div className="flex flex-col w-full p-4">
@@ -75,27 +85,41 @@ export default function Home() {
 				</div>
 				<UserProfile name="Sebastian Urdanegui" email="sebasurdanegui@gmail.com" />
 			</header>
-			<main className="flex flex-col items-start p-4 overflow-x-hidden">
-				<div className="flex flex-col items-start gap-2 w-full">
-					<h1 className="font-bold text-white text-lg sm:text-xl md:text-3xl">Bienvenido, Sebastian</h1>
-					<h2 className="text-gray-300 text-base md:text-md">Te encuentras en tu panel web de facturación.</h2>
-					<div className="flex gap-4 w-full overflow-x-auto scrollbar py-4">
-						{
-							dataCardDetail.map((item) => (
-								<CardAnalytics
-									key={item.id}
-									id={item.id}
-									title={item.title.toUpperCase()}
-									description={item.description}
-									month={item.month}
-									total={item.total}
-									percentage={item.percentage}
-								/>
-							))
-						}
+			<main className="flex flex-col gap-4 items-start p-4 overflow-x-hidden w-full">
+				<div className="flex flex-row items-center justify-between w-full">
+					<div className="py-4">
+						<h1 className="font-bold text-white text-lg sm:text-xl md:text-3xl">Bienvenido, Sebastian</h1>
+						<h2 className="text-gray-300 text-base md:text-md">Te encuentras en tu panel web de facturación.</h2>
 					</div>
-					<Table />
+					<div className="flex gap-4 items-center">
+						<div className="flex gap-2 items-center">
+							{
+								tags.map((item) => (
+									<TagDate
+										key={item.id}
+										date={item.date}
+									/>
+								))
+							}
+						</div>
+					</div>
 				</div>
+				<div className="flex gap-4 w-full overflow-x-auto scrollbar py-4">
+					{
+						dataCardDetail.map((item) => (
+							<CardAnalytics
+								key={item.id}
+								id={item.id}
+								title={item.title.toUpperCase()}
+								description={item.description}
+								month={item.month}
+								total={item.total}
+								percentage={item.percentage}
+							/>
+						))
+					}
+				</div>
+				<Table />
 			</main>
 		</div>
 	)
