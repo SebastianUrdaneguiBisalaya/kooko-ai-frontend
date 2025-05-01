@@ -13,7 +13,7 @@ export default function UserProfile({ name, email }: UserProfileProps) {
 	}
 	return (
 		<div className="relative">
-			<div className="flex items-center gap-2 w-fit border border-gray-300 shadow-xl shadow-gray-700 p-2 rounded-lg">
+			<div className="flex items-center gap-2 w-fit border border-gray-300 shadow-lg shadow-gray-700 p-2 rounded-lg">
 				<div className="relative">
 					<Image
 						src="/profile-pic.png"
