@@ -169,7 +169,7 @@ export default function Table() {
 						table.getRowModel().rows.map(row => (
 							<tr
 								key={row.id}
-								className="transition hover:shadow-md hover:bg-white/5 hover:border-y-2 hover:border-green odd:bg-blue-dark even:bg-blue-dark/20 rounded-md"
+								className="cursor-pointer transition hover:shadow-md hover:bg-white/5 hover:border-y-2 hover:border-green odd:bg-blue-dark even:bg-blue-dark/20 rounded-md"
 							>
 								{
 									row.getVisibleCells().map(cell => (
