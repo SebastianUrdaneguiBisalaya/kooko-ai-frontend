@@ -6,6 +6,14 @@ import Breadcrumbs from "@/components/home/breadcrumbs";
 import Table from "@/components/home/table";
 import CardAnalytics from "@/components/home/card-analytics";
 import TagDate from "@/components/home/tag-date";
+import { DatePicker } from "antd";
+import { ConfigProvider } from 'antd';
+import locale from 'antd/locale/es_ES';
+import dayjs from 'dayjs';
+import 'dayjs/locale/es-mx';
+dayjs.locale('es-mx');
+
+const { RangePicker } = DatePicker; 
 
 const dataCardDetail = [
 	 {
@@ -91,7 +99,12 @@ export default function Home() {
 						<h1 className="font-bold text-white text-lg sm:text-xl md:text-3xl">Bienvenido, Sebastian</h1>
 						<h2 className="text-gray-300 text-base md:text-md">Te encuentras en tu panel web de facturación.</h2>
 					</div>
-					<div className="flex gap-4 items-center">
+					<div className="flex flex-col items-end gap-4">
+						<ConfigProvider locale={locale}>
+							<RangePicker
+								className="custom-range-picker"
+							/>
+						</ConfigProvider>
 						<div className="flex gap-2 items-center">
 							{
 								tags.map((item) => (
