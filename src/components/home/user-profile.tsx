@@ -37,7 +37,7 @@ export default function UserProfile({ name, email }: UserProfileProps) {
 			</div>
 			{
 				showOptions && (
-					<div className="absolute top-16 w-full bg-blue-dark border border-gray-300 rounded-lg">
+					<div className="absolute top-16 w-full bg-blue-dark border border-gray-300 rounded-lg z-[100]">
 						<button
 							type="button"
 							className="text-gray-300 hover:text-white text-sm font-semibold p-2 flex items-center gap-2 cursor-pointer w-full"
