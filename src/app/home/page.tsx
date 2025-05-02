@@ -8,6 +8,7 @@ import Table from "@/components/home/table";
 import CardAnalytics from "@/components/home/card-analytics";
 import TagDate from "@/components/home/tag-date";
 import DateRange from "@/components/home/date-range";
+import SidebarDetail from "@/components/home/sidebar-detail";
 import { Dayjs } from "dayjs";
 
 const dataCardDetail = [
@@ -82,6 +83,7 @@ type DateRangeValue = [Dayjs | null, Dayjs | null] | null;
 
 export default function Home() {
 	const [dateRange, setDateRange] = useState<{ startDate: string | null, endDate: string | null }>({ startDate: null, endDate: null });
+	const [showDetail, setShowDetail] = useState<boolean>(false);
 	const onChangeDateRange = (_dates: DateRangeValue, dateString: [string, string]) => {
 		if (dateString && dateString[0] && dateString[1]) {
 			setDateRange({
@@ -97,7 +99,7 @@ export default function Home() {
 	}
 	const handleSearchDataByFilter = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
-		console.log(dateRange);	
+		console.log(dateRange);
 	}
 	return (
 		<div className="flex flex-col w-full p-4">
@@ -158,7 +160,16 @@ export default function Home() {
 						))
 					}
 				</div>
-				<Table />
+				<Table
+					setShowDetail={setShowDetail}
+				/>
+				{
+					showDetail && (
+						<SidebarDetail
+							setShowDetail={setShowDetail}
+						/>
+					)
+				}
 			</main>
 		</div>
 	)

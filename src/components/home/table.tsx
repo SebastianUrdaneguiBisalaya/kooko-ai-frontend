@@ -117,7 +117,11 @@ const columns = [
 	}),
 ];
 
-export default function Table() {
+type TableProps = {
+	setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Table({ setShowDetail }: TableProps) {
 	const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useItemsTable();
 	const items =  useMemo(
 		() => data?.pages.flatMap(page => page.items) ?? [],
@@ -130,6 +134,7 @@ export default function Table() {
 	});
 	const handleOnClickCell = (id: string) => {
 		console.log(id);
+		setShowDetail(true);
 	}
 	const observerRef = useRef<HTMLDivElement | null>(null);
 	useEffect(() => {
