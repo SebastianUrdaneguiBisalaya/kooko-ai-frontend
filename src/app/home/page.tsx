@@ -1,19 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Icon from "@/components/icon";
 import UserProfile from "@/components/home/user-profile";
 import Breadcrumbs from "@/components/home/breadcrumbs";
 import Table from "@/components/home/table";
 import CardAnalytics from "@/components/home/card-analytics";
 import TagDate from "@/components/home/tag-date";
-import { DatePicker } from "antd";
-import { ConfigProvider } from 'antd';
-import locale from 'antd/locale/es_ES';
-import dayjs from 'dayjs';
-import 'dayjs/locale/es-mx';
-dayjs.locale('es-mx');
-
-const { RangePicker } = DatePicker; 
+import DateRange from "@/components/home/date-range";
+import { Dayjs } from "dayjs";
 
 const dataCardDetail = [
 	 {
@@ -83,7 +78,27 @@ const tags = [
 	{id: 6, date: "6 meses"},
 ]
 
+type DateRangeValue = [Dayjs | null, Dayjs | null] | null;
+
 export default function Home() {
+	const [dateRange, setDateRange] = useState<{ startDate: string | null, endDate: string | null }>({ startDate: null, endDate: null });
+	const onChangeDateRange = (_dates: DateRangeValue, dateString: [string, string]) => {
+		if (dateString && dateString[0] && dateString[1]) {
+			setDateRange({
+				startDate: dateString[0],
+				endDate: dateString[1],
+			});
+		} else {
+			setDateRange({
+				startDate: null,
+				endDate: null,
+			});
+		}
+	}
+	const handleSearchDataByFilter = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+		console.log(dateRange);	
+	}
 	return (
 		<div className="flex flex-col w-full p-4">
 			<header className="flex flex-row justify-between items-center w-full p-4">
@@ -100,11 +115,16 @@ export default function Home() {
 						<h2 className="text-gray-300 text-base md:text-md">Te encuentras en tu panel web de facturación.</h2>
 					</div>
 					<div className="flex flex-col items-end gap-4">
-						<ConfigProvider locale={locale}>
-							<RangePicker
-								className="custom-range-picker"
-							/>
-						</ConfigProvider>
+						<div className="flex gap-4 items-center">
+							<DateRange onChange={onChangeDateRange} />
+							<button
+								type="button"
+								onClick={handleSearchDataByFilter}
+								className="bg-green rounded-full flex flex-col justify-center items-center cursor-pointer p-2"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#000000" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/></svg>
+							</button>
+						</div>
 						<div className="flex gap-2 items-center">
 							{
 								tags.map((item) => (
