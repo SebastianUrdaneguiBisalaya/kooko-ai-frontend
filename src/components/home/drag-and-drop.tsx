@@ -1,6 +1,11 @@
 import { useState, useRef } from "react"
 
-export default function DragAndDrop() {
+type DragAndDropProps = {
+	isLoadingUpload: boolean;
+	setIsLoadingUpload: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function DragAndDrop({ isLoadingUpload, setIsLoadingUpload }: DragAndDropProps) {
 	const [isDragging, setIsDragging] = useState<boolean>(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 
