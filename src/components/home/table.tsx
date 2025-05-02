@@ -128,6 +128,9 @@ export default function Table() {
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 	});
+	const handleOnClickCell = (id: string) => {
+		console.log(id);
+	}
 	const observerRef = useRef<HTMLDivElement | null>(null);
 	useEffect(() => {
 		if (!observerRef.current || !hasNextPage) return;
@@ -169,6 +172,7 @@ export default function Table() {
 						table.getRowModel().rows.map(row => (
 							<tr
 								key={row.id}
+								onClick={() => handleOnClickCell(row.original.id.toString())}
 								className="cursor-pointer transition hover:shadow-md hover:bg-white/5 hover:border-y-2 hover:border-green odd:bg-blue-dark even:bg-blue-dark/20 rounded-md"
 							>
 								{

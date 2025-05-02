@@ -16,7 +16,7 @@ const dataCardDetail = [
 		 title: "Factura N° 00001 - Restaurante ABC",
 		 description: "Egreso del mes",
 		 month: "05/2025",
-		 total: 1950,
+		 total: 1950.00,
 		 percentage: 25,
 	 },
 	 {
@@ -24,7 +24,7 @@ const dataCardDetail = [
 		 title: "Factura N° 00002 - Tienda de Ropa ZYX",
 		 description: "Egreso del mes",
 		 month: "05/2025",
-		 total: 1950,
+		 total: 1950.00,
 		 percentage: 25,
 	 },
 	 {
@@ -32,7 +32,7 @@ const dataCardDetail = [
 		 title: "Factura N° 00003 - Transporte Colectivo",
 		 description: "Egreso del mes",
 		 month: "05/2025",
-		 total: 1950,
+		 total: 1950.00,
 		 percentage: 25,
 	 },
 	 {
@@ -40,7 +40,7 @@ const dataCardDetail = [
 		 title: "Factura N° 00004 - Transporte Colectivo",
 		 description: "Egreso del mes",
 		 month: "05/2025",
-		 total: 1950,
+		 total: 1950.00,
 		 percentage: 25,
 	 },
 	 {
@@ -48,7 +48,7 @@ const dataCardDetail = [
 		 title: "Factura N° 00005 - Transporte Colectivo",
 		 description: "Egreso del mes",
 		 month: "05/2025",
-		 total: 1950,
+		 total: 1950.00,
 		 percentage: 25,
 	 },
 	 {
@@ -56,7 +56,7 @@ const dataCardDetail = [
 		 title: "Factura N° 00006 - Transporte Colectivo",
 		 description: "Egreso del mes",
 		 month: "05/2025",
-		 total: 1950,
+		 total: 1950.00,
 		 percentage: 25,
 	 },
 	 {
@@ -64,7 +64,7 @@ const dataCardDetail = [
 		 title: "Factura N° 00007 - Transporte Colectivo",
 		 description: "Egreso del mes",
 		 month: "05/2025",
-		 total: 1950,
+		 total: 1950.50,
 		 percentage: 25,
 	 }
 ]
@@ -123,6 +123,12 @@ export default function Home() {
 								className="bg-green rounded-full flex flex-col justify-center items-center cursor-pointer p-2"
 							>
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#000000" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/></svg>
+							</button>
+							<button
+								type="button"
+								className="rounded-full flex flex-col justify-center items-center cursor-pointer p-2 border border-green hover:border-gray-300"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#E0F15B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" color="#E0F15B"><path d="M3.5 13v-.804c0-2.967 0-4.45.469-5.636c.754-1.905 2.348-3.407 4.37-4.118C9.595 2 11.168 2 14.318 2c1.798 0 2.698 0 3.416.253c1.155.406 2.066 1.264 2.497 2.353c.268.677.268 1.525.268 3.22V13"/><path d="M3.5 12a3.333 3.333 0 0 1 3.333-3.333c.666 0 1.451.116 2.098-.057a1.67 1.67 0 0 0 1.179-1.18c.173-.647.057-1.432.057-2.098A3.333 3.333 0 0 1 13.5 2m-6 15.22C7.445 16.03 6.622 16 5.505 16c-1.72 0-2.005.406-2.005 2v2c0 1.594.285 2 2.005 2c1.117 0 1.94-.03 1.995-1.22m13-4.78l-1.777 4.695c-.33.87-.494 1.305-.755 1.305c-.26 0-.426-.435-.755-1.305L15.436 16m-2.56 0h-1.18c-.473 0-.709 0-.895.076c-.634.26-.625.869-.625 1.424s-.009 1.165.625 1.424c.186.076.422.076.894.076s.708 0 .894.076c.634.26.625.869.625 1.424s.009 1.165-.625 1.424c-.186.076-.422.076-.894.076H10.41"/></g></svg>
 							</button>
 						</div>
 						<div className="flex gap-2 items-center">
