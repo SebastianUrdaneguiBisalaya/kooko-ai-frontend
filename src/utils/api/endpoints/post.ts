@@ -26,13 +26,6 @@ type RequestPostInvoiceData = {
   others_taxes: number;
 };
 
-type RequestPostProductData = {
-  id_invoice: string;
-  product_name: string;
-  product_price: number;
-  product_quantity: number;
-};
-
 export const postFiles = async (files: File) => {
   const formData = new FormData();
   formData.append("file", files);
@@ -45,10 +38,4 @@ export const postFiles = async (files: File) => {
 
 export const postInvoiceData = async ({ ...data }: RequestPostInvoiceData) => {
   await requester.post("/invoice", data);
-};
-
-export const postInvoiceProductsData = async ({
-  ...data
-}: RequestPostProductData) => {
-  await requester.post("/invoice-products", data);
 };

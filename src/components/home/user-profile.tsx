@@ -4,9 +4,10 @@ import { useState } from "react";
 type UserProfileProps = {
 	name: string;
 	email: string;
+	signOutWithGoogle: () => Promise<void>;
 }
 
-export default function UserProfile({ name, email }: UserProfileProps) {
+export default function UserProfile({ name, email, signOutWithGoogle }: UserProfileProps) {
 	const [showOptions, setShowOptions] = useState<boolean>(false);
 	const handleShowOptions = () => {
 		setShowOptions(!showOptions);
@@ -40,6 +41,7 @@ export default function UserProfile({ name, email }: UserProfileProps) {
 					<div className="absolute top-16 w-full bg-blue-dark border border-gray-300 rounded-lg z-[100]">
 						<button
 							type="button"
+							onClick={signOutWithGoogle}
 							className="text-gray-300 hover:text-white text-sm font-semibold p-2 flex items-center gap-2 cursor-pointer w-full"
 						>
 							<span>
