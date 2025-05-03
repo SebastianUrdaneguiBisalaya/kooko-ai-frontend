@@ -14,6 +14,7 @@ type Item = {
 	payment_date: string;
 	currency_type: string;
 	payment_method: string;
+	category_type: string;
 	id_seller: string;
 	name_seller: string;
 	id_client: string;
@@ -49,6 +50,10 @@ const columns = [
 	}),
 	columnHelper.accessor("currency_type", {
 		header: "Tipo de Moneda",
+		cell: info => info.getValue(),
+	}),
+	columnHelper.accessor("category_type", {
+		header: "Categoría",
 		cell: info => info.getValue(),
 	}),
 	columnHelper.accessor("id_seller", {

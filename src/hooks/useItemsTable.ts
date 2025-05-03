@@ -8,6 +8,7 @@ type Item = {
   payment_date: string;
   currency_type: string;
   payment_method: string;
+  category_type: string;
   id_seller: string;
   name_seller: string;
   id_client: string;
@@ -49,6 +50,7 @@ export const useItemsTable = () => {
             payment_date: "2023-01-01",
             currency_type: "EUR",
             payment_method: "Pago en efectivo",
+            category_type: "Comida",
             id_seller: "1",
             name_seller: "Seller 1",
             id_client: "1",
@@ -73,6 +75,7 @@ export const useItemsTable = () => {
             payment_date: "2023-01-01",
             currency_type: "EUR",
             payment_method: "Pago en efectivo",
+            category_type: "Vestimenta",
             id_seller: "1",
             name_seller: "Seller 1",
             id_client: "1",
@@ -97,6 +100,7 @@ export const useItemsTable = () => {
             payment_date: "2023-01-01",
             currency_type: "EUR",
             payment_method: "Pago en efectivo",
+            category_type: "Finanzas",
             id_seller: "1",
             name_seller: "Seller 1",
             id_client: "1",
