@@ -154,7 +154,7 @@ export default function Table({ setShowDetail }: TableProps) {
 	}, [fetchNextPage, hasNextPage]);
 
 	return (
-		<div className="flex flex-col py-4 w-full overflow-x-auto scrollbar">
+		<div className="flex flex-col p-4 w-full overflow-x-auto scrollbar bg-blue-dark/40 rounded-2xl">
 			<table className="min-w-full table-auto">
 				<thead className="">
 					{
