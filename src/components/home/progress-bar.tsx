@@ -9,7 +9,7 @@ export default function ProgressBar({ value, max }: ProgressBarProps) {
 	const progress = value / max;
 	const width = progress * 100;
 	return (
-		<div className="flex flex-col items-end gap-2 w-full">
+		<div className="flex flex-col items-end gap-2 w-full mb-6">
 			<div className="flex items-center gap-4 w-full">
 				<div className="flex items-center w-full h-1.5 bg-gray-500 rounded-full">
 					<div
