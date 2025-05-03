@@ -39,7 +39,7 @@ const dataCardDetail = [
 	 },
 	 {
 		 id: 4,
-		 title: "COMIDA",
+		 title: "Alimentación",
 		 description: "Egreso del mes",
 		 month: "05/2025",
 		 total: 1950.00,
@@ -47,7 +47,7 @@ const dataCardDetail = [
 	 },
 	 {
 		 id: 5,
-		 title: "Factura N° 00005 - Transporte Colectivo",
+		 title: "Transporte",
 		 description: "Egreso del mes",
 		 month: "05/2025",
 		 total: 1950.00,
@@ -55,7 +55,7 @@ const dataCardDetail = [
 	 },
 	 {
 		 id: 6,
-		 title: "Factura N° 00006 - Transporte Colectivo",
+		 title: "Servicios básicos",
 		 description: "Egreso del mes",
 		 month: "05/2025",
 		 total: 1950.00,
@@ -63,12 +63,44 @@ const dataCardDetail = [
 	 },
 	 {
 		 id: 7,
-		 title: "Factura N° 00007 - Transporte Colectivo",
+		 title: "Salud",
 		 description: "Egreso del mes",
 		 month: "05/2025",
 		 total: 1950.50,
 		 percentage: 25,
-	 }
+	 },
+	 {
+		id: 8,
+		title: "Educación",
+		description: "Egreso del mes",
+		month: "05/2025",
+		total: 1950.50,
+		percentage: 25,
+	},
+	{
+		id: 9,
+		title: "Tecnología",
+		description: "Egreso del mes",
+		month: "05/2025",
+		total: 1950.50,
+		percentage: 25,
+	},
+	{
+		id: 10,
+		title: "Entretenimiento",
+		description: "Egreso del mes",
+		month: "05/2025",
+		total: 1950.50,
+		percentage: 25,
+	},
+	{
+		id: 11,
+		title: "Hogar y oficina",
+		description: "Egreso del mes",
+		month: "05/2025",
+		total: 1950.50,
+		percentage: 25,
+	},
 ]
 
 const tags = [
