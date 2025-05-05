@@ -123,11 +123,20 @@ const columns = [
 ];
 
 type TableProps = {
+	user_id: string;
+	dateRange?: { startDate: string | null; endDate: string | null };
 	setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Table({ setShowDetail }: TableProps) {
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useItemsTable();
+export default function Table({ user_id, dateRange,setShowDetail }: TableProps) {
+	const {
+		data,
+		fetchNextPage,
+		hasNextPage,
+		isFetchingNextPage,
+		isLoading,
+		isError
+	} = useItemsTable(user_id, dateRange);
 	const items =  useMemo(
 		() => data?.pages.flatMap(page => page.items) ?? [],
 		[data]
@@ -144,15 +153,29 @@ export default function Table({ setShowDetail }: TableProps) {
 	const observerRef = useRef<HTMLDivElement | null>(null);
 	useEffect(() => {
 		if (!observerRef.current || !hasNextPage) return;
-		const observer = new IntersectionObserver(([entry]) => {
-			if (entry.isIntersecting && hasNextPage) {
-				fetchNextPage();
+		const observer = new IntersectionObserver(
+			entries => {
+				if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+					fetchNextPage();
+				}
+			},
+			{
+				threshold: 0.5,
 			}
-		});
-		observer.observe(observerRef.current);
-		return () => observer.disconnect();
-	}, [fetchNextPage, hasNextPage]);
+		);
+		const currentTarget = observerRef.current;
+		if (currentTarget) {
+			observer.observe(currentTarget);
+		}
+		return () => {
+			if (currentTarget) {
+				observer.unobserve(currentTarget);
+			}
+		}
+	}, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
+	if (isLoading) return <p className="text-gray-300 text-sm text-center">Cargando...</p>;
+	if (isError) return <p className="text-gray-300 text-sm text-center">Error al cargar los datos.</p>;
 	return (
 		<div className="flex flex-col p-4 w-full overflow-x-auto scrollbar bg-blue-dark/40 rounded-2xl">
 			<table className="min-w-full table-auto">
@@ -200,7 +223,7 @@ export default function Table({ setShowDetail }: TableProps) {
 					}
 				</tbody>
 			</table>
-			<div ref={observerRef} />
+			<div className="w-full h-4 my-2" ref={observerRef} />
 			{
 				isFetchingNextPage && (
 					<p
@@ -208,6 +231,16 @@ export default function Table({ setShowDetail }: TableProps) {
 					>
 						Cargando más datos...
 					</p>
+				)
+			}
+			{
+				!hasNextPage && items.length > 0 && (
+					<p className="text-gray-300 text-sm font-semibold text-center">No hay más datos.</p>
+				)
+			}
+			{
+				items.length === 0 && (
+					<p className="text-gray-300 text-sm font-semibold text-center">No hay datos.</p>	
 				)
 			}
 		</div>

@@ -114,12 +114,12 @@ const dataCardDetail = [
 ]
 
 const tags = [
-	{id: 1, date: "Hoy"},
-	{id: 2, date: "Ayer"},
-	{id: 3, date: "7 días"},
-	{id: 4, date: "1 mes"},
-	{id: 5, date: "3 meses"},
-	{id: 6, date: "6 meses"},
+	{id: 0, date: "Hoy"},
+	{id: 1, date: "Ayer"},
+	{id: 7, date: "7 días"},
+	{id: 30, date: "1 mes"},
+	{id: 90, date: "3 meses"},
+	{id: 180, date: "6 meses"},
 ]
 
 type DateRangeValue = [Dayjs | null, Dayjs | null] | null;
@@ -129,6 +129,7 @@ export default function Home({ user }: UserPage) {
 	const [dateRange, setDateRange] = useState<{ startDate: string | null, endDate: string | null }>({ startDate: null, endDate: null });
 	const [showDetail, setShowDetail] = useState<boolean>(false);
 	const [showUpload, setShowUpload] = useState<boolean>(false);
+	const [shouldFetchData, setShouldFetchData] = useState<boolean>(false);
 	const onChangeDateRange = (_dates: DateRangeValue, dateString: [string, string]) => {
 		if (dateString && dateString[0] && dateString[1]) {
 			setDateRange({
@@ -145,6 +146,7 @@ export default function Home({ user }: UserPage) {
 	const handleSearchDataByFilter = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		console.log(dateRange);
+		setShouldFetchData(true);
 	}
 	const handleUploadFile = () => {
 		setShowUpload(true);
@@ -220,6 +222,8 @@ export default function Home({ user }: UserPage) {
 					}
 				</div>
 				<Table
+					user_id={user.user_id}
+					dateRange={shouldFetchData ? dateRange : undefined}
 					setShowDetail={setShowDetail}
 				/>
 				{
