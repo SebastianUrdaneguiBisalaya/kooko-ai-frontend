@@ -11,7 +11,7 @@ export const updateUserDataById = async ({
   phoneNumber,
   countryCode,
 }: RequestPatchUserData) => {
-  await requester.patch(`users/${id}`, {
+  await requester.patch(`/users/${id}`, {
     phoneNumber,
     countryCode,
   });
