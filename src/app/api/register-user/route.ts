@@ -30,6 +30,7 @@ export async function POST(request: Request) {
       return NextResponse.json({
         message: "El usuario ya existe.",
         status: 200,
+        isError: false,
       });
     }
     const { error: createdUserError } = await supabase.from("users").insert({
@@ -48,6 +49,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: "Usuario creado con éxito.",
       status: 201,
+      isError: false,
     });
   } catch (error: unknown) {
     return NextResponse.json({

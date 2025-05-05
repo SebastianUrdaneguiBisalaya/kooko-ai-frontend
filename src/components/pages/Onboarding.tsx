@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import Icon from "@/components/icon"
+import requester from "@/utils/api/requester";
 
 type UserPage = {
 	user: {
@@ -27,12 +28,25 @@ export default function Onboarding({ user }: UserPage) {
 		phoneNumber: "",
 		countryCode: "pe",
 	});
-	const handleSubmit = () => {
-		setIsLoading(true);
-		setTimeout(() => {
+	const handleSubmit = async () => {
+		if (personalData.phoneNumber.length < 9) return;
+		try {
+			setIsLoading(true);
+			const response = await requester.patch(
+				`/users/${user.user_id}`,
+				{
+					phoneNumber: personalData.phoneNumber,
+					countryCode: personalData.countryCode,
+				}
+			);
+			if (!response.data.isError) {
+				router.push("/home");
+			}
+		} catch (error) {
+			throw new Error(`Hubo un problema con la solicitud al servidor. Por favor, inténtalo de nuevo más tarde. ${error}`);
+		} finally {
 			setIsLoading(false);
-			router.push("/home");
-		}, 2000);
+		}
 	}
 	return (
 		<div className="flex flex-col items-start gap-6 grow justify-center h-full w-full p-4">

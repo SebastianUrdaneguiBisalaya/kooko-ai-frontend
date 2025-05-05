@@ -20,6 +20,7 @@ export async function GET(request: Request) {
           error: userError,
         } = await supabase.auth.getUser();
         if (userError || !user) {
+          console.log("userError", userError);
           return NextResponse.redirect(`${origin}/auth/auth-code-error`);
         }
         const accessToken = session?.access_token;
@@ -40,7 +41,7 @@ export async function GET(request: Request) {
         if (response.data.isError) {
           return NextResponse.redirect(`${origin}/auth/auth-code-error`);
         }
-        const isNewUser = response.status === 200;
+        const isNewUser = response.data.status === 201;
         const forwardedHost = request.headers.get("X-Forwarded-Host");
         const isLocalEnvironment = process.env.NODE_ENV === "development";
         const redirectUrl = isNewUser ? "/onboarding" : "/home";
