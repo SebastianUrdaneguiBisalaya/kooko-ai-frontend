@@ -1,25 +1,44 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/utils/supabase/server";
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const file = formData.get("file");
   if (!file) {
-    return new Response(
-      JSON.stringify({ error: "No se ha encontrado el archivo." }),
-      {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Methods": "POST",
-        },
-      }
-    );
+    return NextResponse.json({
+      error: "Faltan datos obligatorios.",
+      status: 400,
+      isError: true,
+    });
   }
-  return new Response(JSON.stringify({ file: file }), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Methods": "POST",
-    },
-  });
+  try {
+    const supabase = await createClient();
+    const { data: upload, error: errorUpload } = await supabase.storage
+      .from("invoices")
+      .upload(file, "invoices");
+    if (errorUpload) {
+      return NextResponse.json({
+        error: errorUpload.message,
+        status: 500,
+        isError: true,
+      });
+    }
+    const { data: register, error: errorRegister } = await supabase.rpc("", {});
+    if (errorRegister) {
+      return NextResponse.json({
+        error: errorRegister.message,
+        status: 500,
+        isError: true,
+      });
+    }
+    return NextResponse.json({
+      isError: false,
+    });
+  } catch (error: unknown) {
+    return NextResponse.json({
+      error: (error as Error).message,
+      status: 500,
+      isError: true,
+    });
+  }
 }
