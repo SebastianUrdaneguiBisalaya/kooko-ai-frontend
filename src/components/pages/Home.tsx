@@ -9,7 +9,6 @@ import CardAnalytics from "@/components/home/card-analytics";
 import TagDate from "@/components/home/tag-date";
 import DateRange from "@/components/home/date-range";
 import SidebarDetail from "@/components/home/sidebar-detail";
-import SidebarUpload from "@/components/home/sidebar-upload";
 import { Dayjs } from "dayjs";
 import { SignOutWithGoogle } from "@/app/auth/actions";
 
@@ -129,7 +128,6 @@ export default function Home({ user }: UserPage) {
 	const [dateRange, setDateRange] = useState<{ startDate: string | null, endDate: string | null }>({ startDate: null, endDate: null });
 	const [showDetail, setShowDetail] = useState<boolean>(false);
 	const [dateIndexSelected, setDateIndexSelected] = useState<number>(0);
-	const [showUpload, setShowUpload] = useState<boolean>(false);
 	const [shouldFetchData, setShouldFetchData] = useState<boolean>(false);
 	const onChangeDateRange = (_dates: DateRangeValue, dateString: [string, string]) => {
 		if (dateString && dateString[0] && dateString[1]) {
@@ -148,9 +146,6 @@ export default function Home({ user }: UserPage) {
 		event.preventDefault();
 		console.log(dateRange);
 		setShouldFetchData(true);
-	}
-	const handleUploadFile = () => {
-		setShowUpload(true);
 	}
 	const handleTagDateClick = (id: number) => {
 		const today = new Date();
@@ -190,13 +185,6 @@ export default function Home({ user }: UserPage) {
 								className="bg-green rounded-full flex flex-col justify-center items-center cursor-pointer p-2"
 							>
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#000000" d="M6.4 18L5 16.6L14.6 7H6V5h12v12h-2V8.4z"/></svg>
-							</button>
-							<button
-								type="button"
-								onClick={handleUploadFile}
-								className="rounded-full flex flex-col justify-center items-center cursor-pointer p-2 border border-green hover:border-gray-300"
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#E0F15B" d="M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16zm-5 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"/></svg>
 							</button>
 							<button
 								type="button"
@@ -245,13 +233,6 @@ export default function Home({ user }: UserPage) {
 				showDetail && (
 					<SidebarDetail
 						setShowDetail={setShowDetail}
-					/>
-				)
-			}
-			{
-				showUpload && (
-					<SidebarUpload
-						setShowUpload={setShowUpload}
 					/>
 				)
 			}
