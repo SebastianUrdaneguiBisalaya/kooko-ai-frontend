@@ -24,6 +24,7 @@ type UserPage = {
 
 type Item = {
 	id: number;
+	id_invoice: string;
 	date: string;
 	time: string;
 	payment_date: string;
@@ -46,19 +47,6 @@ type Item = {
 	discount: number;
 	others_charge: number;
 	others_taxes: number;
-}
-
-type ItemDetail = {
-	id: string;
-	id_invoice: string;
-	product_name: string;
-	unit_price: number;
-	quantity: number;
-}
-
-type ItemDetailResponse = {
-	prev: Item | null;
-	next: ItemDetail[] | null;
 }
 
 const dataCardDetail = [
@@ -194,7 +182,6 @@ export default function Home({ user }: UserPage) {
 	}
 	const handleSearchDataByFilter = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
-		console.log(dateRange);
 		setShouldFetchData(true);
 	}
 	const handleTagDateClick = (id: number) => {

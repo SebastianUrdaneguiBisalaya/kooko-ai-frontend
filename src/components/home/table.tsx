@@ -9,6 +9,7 @@ import { useItemsTable } from "@/hooks/useItemsTable";
 
 type Item = {
 	id: number;
+	id_invoice: string;
 	date: string;
 	time: string;
 	payment_date: string;

@@ -20,7 +20,6 @@ export async function GET(request: Request) {
           error: userError,
         } = await supabase.auth.getUser();
         if (userError || !user) {
-          console.log("userError", userError);
           return NextResponse.redirect(`${origin}/auth/auth-code-error`);
         }
         const accessToken = session?.access_token;

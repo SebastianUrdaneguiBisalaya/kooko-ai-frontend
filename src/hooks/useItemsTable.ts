@@ -3,6 +3,7 @@ import requester from "@/utils/api/requester";
 
 type Item = {
   id: number;
+  id_invoice: string;
   date: string;
   time: string;
   payment_date: string;
@@ -52,8 +53,6 @@ export const useItemsTable = (
         url += `&startDate=${dateRange.startDate}`;
       }
       const res = await requester.get<ItemsResponse>(url);
-      console.log(res);
-      console.log(pageParam);
       const hasMore = res.data.items.length === PAGE_SIZE;
       return {
         items: res.data.items,
