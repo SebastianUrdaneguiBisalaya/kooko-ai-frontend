@@ -240,21 +240,21 @@ export default function Home({ user }: UserPage) {
 					dateRange={shouldFetchData ? dateRange : undefined}
 					setShowDetail={setShowDetail}
 				/>
-				{
-					showDetail && (
-						<SidebarDetail
-							setShowDetail={setShowDetail}
-						/>
-					)
-				}
-				{
-					showUpload && (
-						<SidebarUpload
-							setShowUpload={setShowUpload}
-						/>
-					)
-				}
 			</main>
+			{
+				showDetail && (
+					<SidebarDetail
+						setShowDetail={setShowDetail}
+					/>
+				)
+			}
+			{
+				showUpload && (
+					<SidebarUpload
+						setShowUpload={setShowUpload}
+					/>
+				)
+			}
 		</div>
 	)
 }
