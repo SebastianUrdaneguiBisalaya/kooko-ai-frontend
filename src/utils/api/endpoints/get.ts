@@ -18,10 +18,13 @@ type RequestGetInvoicesSummary = {
 };
 
 type ResponseGetInvoicesSummary = {
-  category_type: string;
-  now_data: number;
-  prev_data: number;
-  pct_change: number;
+  item: {
+    title: string;
+    description: string;
+    total: number;
+    percentage: number;
+  }[];
+  isError: boolean;
 };
 
 export const getInvoiceDetailById = async ({
@@ -34,8 +37,8 @@ export const getInvoiceDetailById = async ({
 
 export const getInvoicesSummary = async ({
   user_id,
-}: RequestGetInvoicesSummary): Promise<ResponseGetInvoicesSummary[]> => {
-  const response: AxiosResponse<ResponseGetInvoicesSummary[]> =
+}: RequestGetInvoicesSummary): Promise<ResponseGetInvoicesSummary> => {
+  const response: AxiosResponse<ResponseGetInvoicesSummary> =
     await requester.get(`/metrics/${user_id}`);
   return response.data;
 };

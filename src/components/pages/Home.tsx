@@ -11,7 +11,7 @@ import DateRange from "@/components/home/date-range";
 import SidebarDetail from "@/components/home/sidebar-detail";
 import { Dayjs } from "dayjs";
 import { SignOutWithGoogle } from "@/app/auth/actions";
-import { useGetInvoiceDetailById } from "@/utils/api/hooks/useGet";
+import { useGetInvoiceDetailById, useGetInvoicesSummary } from "@/utils/api/hooks/useGet";
 
 type UserPage = {
 	user: {
@@ -49,97 +49,6 @@ type Item = {
 	others_taxes: number;
 }
 
-const dataCardDetail = [
-	 {
-		 id: 1,
-		 title: "Egreso mensual",
-		 description: "Total del mes",
-		 month: "05/2025",
-		 total: 1950.00,
-		 percentage: 25,
-	 },
-	 {
-		 id: 2,
-		 title: "Op. Gravada",
-		 description: "Sub total del mes",
-		 month: "05/2025",
-		 total: 1950.00,
-		 percentage: 25,
-	 },
-	 {
-		 id: 3,
-		 title: "Impuestos",
-		 description: "Total del mes",
-		 month: "05/2025",
-		 total: 1950.00,
-		 percentage: 25,
-	 },
-	 {
-		 id: 4,
-		 title: "Alimentación",
-		 description: "Egreso del mes",
-		 month: "05/2025",
-		 total: 1950.00,
-		 percentage: 25,
-	 },
-	 {
-		 id: 5,
-		 title: "Transporte",
-		 description: "Egreso del mes",
-		 month: "05/2025",
-		 total: 1950.00,
-		 percentage: 25,
-	 },
-	 {
-		 id: 6,
-		 title: "Servicios básicos",
-		 description: "Egreso del mes",
-		 month: "05/2025",
-		 total: 1950.00,
-		 percentage: 25,
-	 },
-	 {
-		 id: 7,
-		 title: "Salud",
-		 description: "Egreso del mes",
-		 month: "05/2025",
-		 total: 1950.50,
-		 percentage: 25,
-	 },
-	 {
-		id: 8,
-		title: "Educación",
-		description: "Egreso del mes",
-		month: "05/2025",
-		total: 1950.50,
-		percentage: 25,
-	},
-	{
-		id: 9,
-		title: "Tecnología",
-		description: "Egreso del mes",
-		month: "05/2025",
-		total: 1950.50,
-		percentage: 25,
-	},
-	{
-		id: 10,
-		title: "Entretenimiento",
-		description: "Egreso del mes",
-		month: "05/2025",
-		total: 1950.50,
-		percentage: 25,
-	},
-	{
-		id: 11,
-		title: "Hogar y oficina",
-		description: "Egreso del mes",
-		month: "05/2025",
-		total: 1950.50,
-		percentage: 25,
-	},
-]
-
 const tags = [
 	{id: 1, date: "Hoy"},
 	{id: 2, date: "Ayer"},
@@ -157,6 +66,14 @@ export default function Home({ user }: UserPage) {
 	const [dateIndexSelected, setDateIndexSelected] = useState<number>(0);
 	const [shouldFetchData, setShouldFetchData] = useState<boolean>(false);
 	const [selectedInvoice, setSelectedInvoice] = useState<Item | null>(null);
+
+	const {
+		data: invoicesSummary,
+		isLoading: isLoadingInvoicesSummary,
+		isError: isErrorInvoicesSummary
+	} = useGetInvoicesSummary({
+		user_id: user.user_id,
+	});
 
 	const {
 			data: invoiceDetail,
@@ -247,13 +164,12 @@ export default function Home({ user }: UserPage) {
 				</div>
 				<div className="flex gap-4 w-full overflow-x-auto scrollbar py-4">
 					{
-						dataCardDetail.map((item) => (
+						!isLoadingInvoicesSummary && invoicesSummary && invoicesSummary.item.length > 0 && invoicesSummary.item.map((item) => (
 							<CardAnalytics
-								key={item.id}
-								id={item.id}
-								title={item.title.toUpperCase()}
+								key={item.title}
+								title={item.title}
 								description={item.description}
-								month={item.month}
+								month="Ult. 30d."
 								total={item.total}
 								percentage={item.percentage}
 							/>
@@ -285,6 +201,16 @@ export default function Home({ user }: UserPage) {
 							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#e11d48" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10c-.006 5.52-4.48 9.994-10 10Zm-1-7v2h2v-2h-2Zm0-8v6h2V7h-2Z"/></svg>
 						</span>
 						<p className="text-gray-300 text-sm">Ocurrió un problema al cargar los datos de la factura/boleta.</p>
+					</div>
+				)
+			}
+			{
+				isErrorInvoicesSummary && (
+					<div className="flex items-center gap-3 fixed bottom-10 right-4 max-w-96 w-full h-fit bg-dark border border-gray-400 rounded-xl shadow-2xl p-4 z-[100]">
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#e11d48" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10c-.006 5.52-4.48 9.994-10 10Zm-1-7v2h2v-2h-2Zm0-8v6h2V7h-2Z"/></svg>
+						</span>
+						<p className="text-gray-300 text-sm">Ocurrió un problema al cargar las métricas.</p>
 					</div>
 				)
 			}

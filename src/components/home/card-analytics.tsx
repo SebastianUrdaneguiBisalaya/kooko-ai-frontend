@@ -1,7 +1,6 @@
 import roundedFloat from "@/utils/home/home";
 
 type CardAnalyticsProps = {
-	id: number,
 	title: string,
 	description: string,
 	month: string,
