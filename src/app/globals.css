@@ -40,6 +40,8 @@ body {
 	position: relative;
 	background-image: url("/ellipse-gradient.png");
 	scroll-behavior: smooth;
+	min-height: 100vh;
+	height: 100%;
 }
 
 html::-webkit-scrollbar, .scrollbar::-webkit-scrollbar {

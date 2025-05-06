@@ -28,6 +28,9 @@ export async function GET(
     if (startDate && endDate) {
       query = query.gte("date", startDate).lte("date", endDate);
     }
+    if (startDate && !endDate) {
+      query = query.gte("date", startDate);
+    }
     query = query.range(from, to).order("date", { ascending: false });
     const { data, error } = await query;
     if (error) {

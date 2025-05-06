@@ -114,8 +114,8 @@ const dataCardDetail = [
 ]
 
 const tags = [
-	{id: 0, date: "Hoy"},
-	{id: 1, date: "Ayer"},
+	{id: 1, date: "Hoy"},
+	{id: 2, date: "Ayer"},
 	{id: 7, date: "7 días"},
 	{id: 30, date: "1 mes"},
 	{id: 90, date: "3 meses"},
@@ -128,6 +128,7 @@ export default function Home({ user }: UserPage) {
 	console.log("user home", user);
 	const [dateRange, setDateRange] = useState<{ startDate: string | null, endDate: string | null }>({ startDate: null, endDate: null });
 	const [showDetail, setShowDetail] = useState<boolean>(false);
+	const [dateIndexSelected, setDateIndexSelected] = useState<number>(0);
 	const [showUpload, setShowUpload] = useState<boolean>(false);
 	const [shouldFetchData, setShouldFetchData] = useState<boolean>(false);
 	const onChangeDateRange = (_dates: DateRangeValue, dateString: [string, string]) => {
@@ -150,6 +151,16 @@ export default function Home({ user }: UserPage) {
 	}
 	const handleUploadFile = () => {
 		setShowUpload(true);
+	}
+	const handleTagDateClick = (id: number) => {
+		const today = new Date();
+		today.setDate(today.getDate() - id);
+		setDateIndexSelected(id);
+		setDateRange({
+			startDate: today.toISOString().split("T")[0],
+			endDate: null,
+		})
+		setShouldFetchData(true);
 	}
 	return (
 		<div className="flex flex-col w-full p-4">
@@ -198,8 +209,11 @@ export default function Home({ user }: UserPage) {
 							{
 								tags.map((item) => (
 									<TagDate
-										key={item.id}
+										key={item.id.toString()}
+										id={item.id}
 										date={item.date}
+										onClick={handleTagDateClick}
+										dateIndexSelected={dateIndexSelected}
 									/>
 								))
 							}

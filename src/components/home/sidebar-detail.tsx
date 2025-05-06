@@ -46,7 +46,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 	useEffect(() => {
 		document.body.style.overflowY = "hidden";
 		return () => {
-			document.body.style.overflowY = "unset";
+			document.body.style.overflowY = "auto";
 		}
 	}, []);
 	return (

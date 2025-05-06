@@ -48,6 +48,9 @@ export const useItemsTable = (
       if (dateRange?.startDate && dateRange?.endDate) {
         url += `&startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`;
       }
+      if (dateRange?.startDate && !dateRange?.endDate) {
+        url += `&startDate=${dateRange.startDate}`;
+      }
       const res = await requester.get<ItemsResponse>(url);
       console.log(res);
       console.log(pageParam);
