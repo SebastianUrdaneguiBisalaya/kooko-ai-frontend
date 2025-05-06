@@ -12,7 +12,10 @@ export async function GET({ params }: { params: Promise<{ id: string }> }) {
   }
   try {
     const supabase = await createClient();
-    const { data, error } = await supabase.from("").select("");
+    const { data, error } = await supabase
+      .from("invoices_detail")
+      .select("*")
+      .eq("id_invoice", id);
     if (error) {
       return NextResponse.json({
         error: error.message,

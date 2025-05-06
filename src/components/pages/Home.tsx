@@ -11,6 +11,7 @@ import DateRange from "@/components/home/date-range";
 import SidebarDetail from "@/components/home/sidebar-detail";
 import { Dayjs } from "dayjs";
 import { SignOutWithGoogle } from "@/app/auth/actions";
+import { useGetInvoiceDetailById } from "@/utils/api/hooks/useGet";
 
 type UserPage = {
 	user: {
@@ -19,6 +20,45 @@ type UserPage = {
 		user_name: string;
 		user_avatar: string;
 	}
+}
+
+type Item = {
+	id: number;
+	date: string;
+	time: string;
+	payment_date: string;
+	currency_type: string;
+	payment_method: string;
+	category_type: string;
+	id_seller: string;
+	name_seller: string;
+	id_client: string;
+	name_client: string;
+	address: string;
+	total: number;
+	recorded_operation: number;
+	igv: number;
+	isc: number;
+	unaffected: number;
+	exonerated: number;
+	export: number;
+	free: number;
+	discount: number;
+	others_charge: number;
+	others_taxes: number;
+}
+
+type ItemDetail = {
+	id: string;
+	id_invoice: string;
+	product_name: string;
+	unit_price: number;
+	quantity: number;
+}
+
+type ItemDetailResponse = {
+	prev: Item | null;
+	next: ItemDetail[] | null;
 }
 
 const dataCardDetail = [
@@ -124,11 +164,21 @@ const tags = [
 type DateRangeValue = [Dayjs | null, Dayjs | null] | null;
 
 export default function Home({ user }: UserPage) {
-	console.log("user home", user);
 	const [dateRange, setDateRange] = useState<{ startDate: string | null, endDate: string | null }>({ startDate: null, endDate: null });
 	const [showDetail, setShowDetail] = useState<boolean>(false);
 	const [dateIndexSelected, setDateIndexSelected] = useState<number>(0);
 	const [shouldFetchData, setShouldFetchData] = useState<boolean>(false);
+	const [selectedInvoice, setSelectedInvoice] = useState<Item | null>(null);
+
+	const {
+			data: invoiceDetail,
+			isLoading: isLoadingInvoiceDetail,
+			isError: isErrorInvoiceDetail
+		} = useGetInvoiceDetailById({
+			id: selectedInvoice?.id.toString() || "",
+			enabled: !!selectedInvoice?.id.toString(),
+		});
+
 	const onChangeDateRange = (_dates: DateRangeValue, dateString: [string, string]) => {
 		if (dateString && dateString[0] && dateString[1]) {
 			setDateRange({
@@ -226,14 +276,29 @@ export default function Home({ user }: UserPage) {
 				<Table
 					user_id={user.user_id}
 					dateRange={shouldFetchData ? dateRange : undefined}
+					setSelectedInvoice={setSelectedInvoice}
 					setShowDetail={setShowDetail}
 				/>
 			</main>
 			{
-				showDetail && (
+				showDetail && invoiceDetail && !isLoadingInvoiceDetail && (
 					<SidebarDetail
+						data={{
+							prev: selectedInvoice,
+							next: invoiceDetail,
+						}}
 						setShowDetail={setShowDetail}
 					/>
+				)
+			}
+			{
+				isErrorInvoiceDetail && (
+					<div className="flex items-center gap-3 fixed bottom-10 right-4 max-w-96 w-full h-fit bg-dark border border-gray-400 rounded-xl shadow-2xl p-4 z-[100]">
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#e11d48" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10c-.006 5.52-4.48 9.994-10 10Zm-1-7v2h2v-2h-2Zm0-8v6h2V7h-2Z"/></svg>
+						</span>
+						<p className="text-gray-300 text-sm">Ocurrió un problema al cargar los datos de la factura/boleta.</p>
+					</div>
 				)
 			}
 		</div>

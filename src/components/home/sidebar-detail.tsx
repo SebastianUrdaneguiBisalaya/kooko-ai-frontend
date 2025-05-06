@@ -2,33 +2,51 @@ import { useState, useEffect } from "react"
 import { createPortal } from "react-dom";
 import CardProductDetail from "@/components/home/card-product-detail";
 
-const dataCardProducts = [
-	{
-		id: "1",
-		productName: "iPhone 14 Pro Max",
-		productPrice: 1000,
-		productQuantity: 1,
-	},
-	{
-		id: "2",
-		productName: "iPhone 14 Pro Max",
-		productPrice: 1000,
-		productQuantity: 1,
-	},
-	{
-		id: "3",
-		productName: "iPhone 14 Pro Max",
-		productPrice: 1000,
-		productQuantity: 1,
-	},
-];
+type Item = {
+	id: number;
+	date: string;
+	time: string;
+	payment_date: string;
+	currency_type: string;
+	payment_method: string;
+	category_type: string;
+	id_seller: string;
+	name_seller: string;
+	id_client: string;
+	name_client: string;
+	address: string;
+	total: number;
+	recorded_operation: number;
+	igv: number;
+	isc: number;
+	unaffected: number;
+	exonerated: number;
+	export: number;
+	free: number;
+	discount: number;
+	others_charge: number;
+	others_taxes: number;
+}
 
+type ItemDetail = {
+	id: string;
+	id_invoice: string;
+	product_name: string;
+	unit_price: number;
+	quantity: number;
+}
+
+type ItemDetailResponse = {
+	prev: Item | null;
+	next: ItemDetail[] | null;
+}
 
 type SidebarDetailProps = {
+	data: ItemDetailResponse;
 	setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
+export default function SidebarDetail({ data, setShowDetail }: SidebarDetailProps) {
 	const [expanded, setExpanded] = useState<Record<string, boolean>>(
 		{
 			payment: true,
@@ -72,8 +90,8 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 								</button>
 
 								<div className="flex items-center justify-between mb-8 w-full">
-									<h2 className="text-lg sm:text-xl md:text-2xl text-white font-semibold">Factura # 12345678</h2>
-									<span className="px-3 py-1 text-xs font-medium bg-gray-800 rounded-full text-gray-300">EUR</span>
+									<h2 className="text-lg sm:text-xl md:text-2xl text-white font-semibold">{`ID ${data.prev?.id}`}</h2>
+									<span className="px-3 py-1 text-xs font-medium bg-gray-800 rounded-full text-gray-300">{`ID ${data.prev?.currency_type}`}</span>
 								</div>
 
 								<div className="grid grid-cols-2 gap-3 mb-6 pb-6 border-b border-gray-600 w-full">
@@ -83,7 +101,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 										</span>
 										<div className="flex flex-col items-start">
 											<span className="text-gray-400 text-xs font-medium">Fecha</span>
-											<span className="text-gray-200 text-sm">2025-05-02</span>
+											<span className="text-gray-200 text-sm">{`ID ${data.prev?.date}`}</span>
 										</div>
 									</div>
 									<div className="flex items-center gap-2">
@@ -92,7 +110,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 										</span>
 										<div className="flex flex-col items-start">
 											<span className="text-gray-400 text-xs font-medium">Hora</span>
-											<span className="text-gray-200 text-sm">15:59:00</span>
+											<span className="text-gray-200 text-sm">{`ID ${data.prev?.time}`}</span>
 										</div>
 									</div>
 								</div>
@@ -125,7 +143,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 													</span>
 													<div className="flex flex-col items-start">
 														<span className="text-gray-400 text-xs font-medium">Fecha de Pago</span>
-														<span className="text-gray-200 text-sm">2025-05-02</span>
+														<span className="text-gray-200 text-sm">{`ID ${data.prev?.payment_date}`}</span>
 													</div>
 												</div>
 												<div className="flex items-center gap-2 w-full">
@@ -134,7 +152,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 													</span>
 													<div className="flex flex-col items-start">
 														<span className="text-gray-400 text-xs font-medium">Método de Pago</span>
-														<span className="text-gray-200 text-sm">Pago en efectivo</span>
+														<span className="text-gray-200 text-sm">{`ID ${data.prev?.payment_method}`}</span>
 													</div>
 												</div>
 											</div>
@@ -171,7 +189,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 														</span>
 														<div className="flex flex-col items-start">
 															<span className="text-gray-400 text-xs font-medium">ID Vendedor</span>
-															<span className="text-gray-200 text-sm">20989379804</span>
+															<span className="text-gray-200 text-sm">{`ID ${data.prev?.id_seller}`}</span>
 														</div>
 													</div>
 													<div className="flex items-center gap-2 w-full">
@@ -180,7 +198,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 														</span>
 														<div className="flex flex-col items-start">
 															<span className="text-gray-400 text-xs font-medium">Vendedor</span>
-															<span className="text-gray-200 text-sm">Rústica S.A.C.</span>
+															<span className="text-gray-200 text-sm">{`ID ${data.prev?.name_seller}`}</span>
 														</div>
 													</div>
 												</div>
@@ -192,7 +210,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 														</span>
 														<div className="flex flex-col items-start">
 															<span className="text-gray-400 text-xs font-medium">ID Cliente</span>
-															<span className="text-gray-200 text-sm">20183464804</span>
+															<span className="text-gray-200 text-sm">{`ID ${data.prev?.id_client}`}</span>
 														</div>
 													</div>
 													<div className="flex items-center gap-2 w-full">
@@ -201,7 +219,7 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 														</span>
 														<div className="flex flex-col items-start">
 															<span className="text-gray-400 text-xs font-medium">Cliente</span>
-															<span className="text-gray-200 text-sm">Apple I.N.C.</span>
+															<span className="text-gray-200 text-sm">{`ID ${data.prev?.name_client}`}</span>
 														</div>
 													</div>
 												</div>
@@ -233,13 +251,13 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 										expanded.products && (
 											<div className="flex flex-col gap-2 w-full items-start">
 												{
-													dataCardProducts.map((item) => (
+													data.next && data?.next?.map((item) => (
 														<CardProductDetail
 															key={item.id}
 															id={item.id}
-															productName={item.productName}
-															productPrice={item.productPrice}
-															productQuantity={item.productQuantity}
+															productName={item.product_name}
+															productPrice={item.unit_price}
+															productQuantity={item.quantity}
 														/>
 													))
 												}
@@ -272,47 +290,47 @@ export default function SidebarDetail({ setShowDetail }: SidebarDetailProps) {
 											<div className="flex flex-col gap-2 w-full items-start">
 												<div className="flex items-center justify-between gap-2 w-full pt-2 pb-3">
 													<span className="text-gray-400 text-sm">Total</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 1,950.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.total}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">Op. Gravada</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 1,950.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.recorded_operation}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">I.G.V.</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.igv}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">I.S.C.</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.isc}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">Op. No Afectada</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.unaffected}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">Op. Exonerada</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.exonerated}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">Op. Exportación</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.export}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">Op. Gratuita</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.free}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">Descuento</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.discount}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">Otros Cargos</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.others_charge}`}</span>
 												</div>
 												<div className="flex items-center justify-between gap-2 w-full pt-4 border-t border-t-gray-600">
 													<span className="text-gray-400 text-sm">Otros Impuestos</span>
-													<span className="text-gray-300 text-sm font-semibold">S/. 195.00</span>
+													<span className="text-gray-300 text-sm font-semibold">{`ID ${data.prev?.others_taxes}`}</span>
 												</div>
 											</div>
 										)

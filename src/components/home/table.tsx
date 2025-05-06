@@ -124,11 +124,12 @@ const columns = [
 
 type TableProps = {
 	user_id: string;
-	dateRange?: { startDate: string | null; endDate: string | null };
 	setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
+	setSelectedInvoice: React.Dispatch<React.SetStateAction<Item | null>>;
+	dateRange?: { startDate: string | null; endDate: string | null };
 }
 
-export default function Table({ user_id, dateRange,setShowDetail }: TableProps) {
+export default function Table({ user_id, setShowDetail, setSelectedInvoice, dateRange }: TableProps) {
 	const {
 		data,
 		fetchNextPage,
@@ -140,14 +141,14 @@ export default function Table({ user_id, dateRange,setShowDetail }: TableProps) 
 	const items =  useMemo(
 		() => data?.pages.flatMap(page => page.items) ?? [],
 		[data]
-	)
+	);
 	const table = useReactTable({
 		data: items,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 	});
-	const handleOnClickCell = (id: string) => {
-		console.log(id);
+	const handleOnClickCell = (data: Item) => {
+		setSelectedInvoice(data);
 		setShowDetail(true);
 	}
 	const observerRef = useRef<HTMLDivElement | null>(null);
@@ -205,7 +206,7 @@ export default function Table({ user_id, dateRange,setShowDetail }: TableProps) 
 						table.getRowModel().rows.map(row => (
 							<tr
 								key={row.id}
-								onClick={() => handleOnClickCell(row.original.id.toString())}
+								onClick={() => handleOnClickCell({...row.original})}
 								className="cursor-pointer transition hover:shadow-md hover:bg-white/5 hover:border-y-2 hover:border-green odd:bg-blue-dark even:bg-blue-dark/20 rounded-md"
 							>
 								{
