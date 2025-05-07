@@ -30,7 +30,7 @@ async function downloadStorageFile(
     }
     const blob = await response.blob();
     const blobUrl = window.URL.createObjectURL(blob);
-    const downloadFileName = "data";
+    const downloadFileName = "data.jpg";
     const link = document.createElement("a");
     link.href = blobUrl;
     link.download = downloadFileName;
