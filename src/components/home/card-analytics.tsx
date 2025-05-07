@@ -1,4 +1,4 @@
-import roundedFloat from "@/utils/home/home";
+import { roundedFloat } from "@/utils/home/home";
 
 type CardAnalyticsProps = {
 	title: string,

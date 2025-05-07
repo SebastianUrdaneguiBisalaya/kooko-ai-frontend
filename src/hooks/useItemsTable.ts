@@ -26,6 +26,7 @@ type Item = {
   discount: number;
   others_charge: number;
   others_taxes: number;
+  path_file: string;
 };
 
 type ItemsResponse = {

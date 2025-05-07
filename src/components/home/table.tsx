@@ -32,6 +32,7 @@ type Item = {
 	discount: number;
 	others_charge: number;
 	others_taxes: number;
+	path_file: string;
 }
 
 const columnHelper = createColumnHelper<Item>();
@@ -127,10 +128,11 @@ type TableProps = {
 	user_id: string;
 	setShowDetail: React.Dispatch<React.SetStateAction<boolean>>;
 	setSelectedInvoice: React.Dispatch<React.SetStateAction<Item | null>>;
+	setTableData: React.Dispatch<React.SetStateAction<Item[]>>;
 	dateRange?: { startDate: string | null; endDate: string | null };
 }
 
-export default function Table({ user_id, setShowDetail, setSelectedInvoice, dateRange }: TableProps) {
+export default function Table({ user_id, setShowDetail, setSelectedInvoice, setTableData, dateRange }: TableProps) {
 	const {
 		data,
 		fetchNextPage,
@@ -143,6 +145,11 @@ export default function Table({ user_id, setShowDetail, setSelectedInvoice, date
 		() => data?.pages.flatMap(page => page.items) ?? [],
 		[data]
 	);
+	useEffect(() => {
+		if (items.length > 0) {
+			setTableData(items);
+		}
+	}, [items, setTableData]);
 	const table = useReactTable({
 		data: items,
 		columns,

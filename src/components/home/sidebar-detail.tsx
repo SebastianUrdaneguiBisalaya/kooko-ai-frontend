@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { createPortal } from "react-dom";
 import CardProductDetail from "@/components/home/card-product-detail";
+import { downloadStorageFile } from "@/utils/home/home";
 
 type Item = {
 	id: number;
@@ -27,6 +28,7 @@ type Item = {
 	discount: number;
 	others_charge: number;
 	others_taxes: number;
+	path_file: string;
 }
 
 type ItemDetail = {
@@ -56,6 +58,7 @@ export default function SidebarDetail({ data, setShowDetail }: SidebarDetailProp
 			financial: true,
 		}
 	);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const handleToggleSection = (section: string) => {
 		setExpanded((prev) => ({
 			...prev,
@@ -340,9 +343,21 @@ export default function SidebarDetail({ data, setShowDetail }: SidebarDetailProp
 
 								<button
 									type="button"
-									className="bg-gray-600 text-gray-200 hover:text-dark hover:bg-green rounded-xl w-full px-4 py-3 cursor-pointer text-sm"
+									onClick={() => downloadStorageFile(data?.prev?.path_file, setIsLoading)}
+									className="bg-gray-600 text-gray-200 hover:text-dark hover:bg-green rounded-xl w-full px-4 py-3 cursor-pointer text-sm flex items-center justify-center gap-3"
 								>
-									Descargar boleta o factura
+									{
+										isLoading && (
+											<span>
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#E0F15B" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5"/><path fill="#E0F15B" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
+											</span>
+										)
+									}
+									<span>
+										{
+											isLoading ? "Descargando..." : "Descargar boleta o factura"
+										}
+									</span>
 								</button>
 							</div>
 						</aside>
