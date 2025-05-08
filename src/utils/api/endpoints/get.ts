@@ -6,11 +6,16 @@ type RequestGetInvoiceDetail = {
 };
 
 type ResponseGetInvoiceDetail = {
-  id: string;
-  id_invoice: string;
-  product_name: string;
-  unit_price: number;
-  quantity: number;
+  item:
+    | {
+        id: string;
+        id_invoice: string;
+        product_name: string;
+        unit_price: number;
+        quantity: number;
+      }[]
+    | null;
+  isError: boolean;
 };
 
 type RequestGetInvoicesSummary = {
@@ -18,20 +23,23 @@ type RequestGetInvoicesSummary = {
 };
 
 type ResponseGetInvoicesSummary = {
-  item: {
-    title: string;
-    description: string;
-    total: number;
-    percentage: number;
-  }[];
+  item:
+    | {
+        title: string;
+        description: string;
+        total: number;
+        percentage: number;
+      }[]
+    | null;
   isError: boolean;
 };
 
 export const getInvoiceDetailById = async ({
   id,
-}: RequestGetInvoiceDetail): Promise<ResponseGetInvoiceDetail[]> => {
-  const response: AxiosResponse<ResponseGetInvoiceDetail[]> =
-    await requester.get(`/invoice-detail/${id}`);
+}: RequestGetInvoiceDetail): Promise<ResponseGetInvoiceDetail> => {
+  const response: AxiosResponse<ResponseGetInvoiceDetail> = await requester.get(
+    `/invoice-detail/${id}`
+  );
   return response.data;
 };
 

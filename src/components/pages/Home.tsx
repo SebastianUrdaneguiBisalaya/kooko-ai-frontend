@@ -83,8 +83,8 @@ export default function Home({ user }: UserPage) {
 			isLoading: isLoadingInvoiceDetail,
 			isError: isErrorInvoiceDetail
 		} = useGetInvoiceDetailById({
-			id: selectedInvoice?.id.toString() || "",
-			enabled: !!selectedInvoice?.id.toString(),
+			id: selectedInvoice?.id_invoice.toString() || "",
+			enabled: !!selectedInvoice?.id_invoice.toString(),
 		});
 
 	const onChangeDateRange = (_dates: DateRangeValue, dateString: [string, string]) => {
@@ -168,7 +168,7 @@ export default function Home({ user }: UserPage) {
 				</div>
 				<div className="flex gap-4 w-full overflow-x-auto scrollbar py-4">
 					{
-						!isLoadingInvoicesSummary && invoicesSummary && invoicesSummary.item.length > 0 && invoicesSummary.item.map((item) => (
+						!isLoadingInvoicesSummary && invoicesSummary && invoicesSummary.item && invoicesSummary.item.length > 0 && invoicesSummary.item.map((item) => (
 							<CardAnalytics
 								key={item.title}
 								title={item.title}

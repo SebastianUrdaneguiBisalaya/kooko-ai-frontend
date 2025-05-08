@@ -1,4 +1,5 @@
 import * as XLSX from "xlsx";
+import { createClient } from "../supabase/client";
 
 function roundedFloat(value: number, decimals: number) {
   return value.toFixed(decimals);
@@ -19,17 +20,19 @@ async function downloadStorageFile(
   url: string | undefined,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) {
-  if (!url || !url.includes("supabase.co/storage")) {
+  if (!url) {
     throw new Error("No se puede descargar el archivo. La URL no es válida.");
   }
   try {
     setIsLoading(true);
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`No se puede descargar el archivo. ${response.status}`);
+    const supabase = await createClient();
+    const { data, error } = await supabase.storage
+      .from("invoices")
+      .download(`${url}`);
+    if (error) {
+      throw new Error(`No se puede descargar el archivo. ${error.message}`);
     }
-    const blob = await response.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
+    const blobUrl = window.URL.createObjectURL(data);
     const downloadFileName = "data.jpg";
     const link = document.createElement("a");
     link.href = blobUrl;
