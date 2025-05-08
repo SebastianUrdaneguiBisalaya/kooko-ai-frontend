@@ -29,28 +29,28 @@ const dataCardDetail = [
 const dataCardFeature = [
 	{
 		title: "Registrar",
-		description: "Envía los comprobantes desde Telegram, el modelo de AI extrae los datos y los tienes disponibles en tu panel web.",
+		description: "Envía tus comprobantes por Telegram, nuestra IA extrae los datos y los organiza automáticamente en tu panel web.",
 		icon: (
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" fill="#E0F15B"/></svg>
 		),
 	},
 	{
 		title: "Visualizar",
-		description: "El modelo de AI extrae los datos y los tienes disponibles en tu panel web con los detalles de cada comprobante.",
+		description: "Accede fácilmente a todos los detalles de tus comprobantes registrados y visualiza tu información financiera de forma clara.",
 		icon: (
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#E0F15B" d="M13 9V3h8v6zM3 13V3h8v10zm10 8V11h8v10zM3 21v-6h8v6z"/></svg>
 		),
 	},
 	{
 		title: "Filtrar",
-		description: "Puedes filtrar los datos por una fecha específica o un rango de fechas de la emisión de los comprobantes.",
+		description: "Encuentra rápidamente cualquier comprobante buscando por fecha o rango de fechas de emisión.",
 		icon: (
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="none" stroke="#E0F15B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4h16v2.172a2 2 0 0 1-.586 1.414L15 12v7l-6 2v-8.5L4.52 7.572A2 2 0 0 1 4 6.227z"/></svg>
 		),
 	},
 	{
 		title: "Descargar",
-		description: "Descarga los datos y las imagenes de tus facturas y boletas de transporte en formato Excel.",
+		description: "Exporta tus datos y las imágenes de tus comprobantes a formato Excel y PNG, respectivamente, para análisis o contabilidad.",
 		icon: (
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#E0F15B" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"/></svg>
 		),
@@ -132,7 +132,7 @@ export default function Home() {
 
 	useEffect(() => {
 		if (videoRef.current) {
-			videoRef.current.playbackRate = 2;
+			videoRef.current.playbackRate = 2.5;
 		}
 	}, []);
 
@@ -235,7 +235,7 @@ export default function Home() {
 					<div className="basis-[30%] self-center">
 						<div className="flex flex-col min-w-40 max-w-80 w-full h-fit lg:w-full lg:h-full bg-[url('/grid.png')] bg-cover bg-center rounded-xl overflow-hidden border border-gray-700 shadow-2xl shadow-gray-900 animate-fade-in-left animate-delay-[2000ms]">
 							<div className="w-full h-full rounded-xl border border-gray-500 p-4">
-								{/* <video
+								<video
 									ref={videoRef}
 									autoPlay
 									loop
@@ -244,7 +244,7 @@ export default function Home() {
 									className="w-full h-full rounded-xl"
 								>
 									<source src="https://res.cloudinary.com/drzumfcdp/video/upload/Landing%20Page%20Sebastian/demo-kooko.ai_ql0maz.mp4" type="video/mp4" />
-								</video> */}
+								</video>
 							</div>
 						</div>
 					</div>
@@ -255,13 +255,13 @@ export default function Home() {
 					className="flex flex-col gap-10 w-full h-full"
 				>
 					<h2
-						className="text-white text-xl sm:text-3xl font-semibold text-center animate-zoom-in animate-delay-[2200ms]"
+						className="text-white text-xl sm:text-3xl font-semibold text-center animate-zoom-in animate-delay-[2200ms] max-w-2xl self-center"
 					>
-						Mantén el control de tus finanzas desde tu panel web
+						Simplifica tu Gestión: Boletas y Facturas Organizadas y Accesibles
 					</h2>
-					<div className="w-full p-4 border border-gray-500 rounded-md bg-gray/20">
+					<div className="w-full p-4 border border-gray-500 rounded-md bg-gray/20 shadow-2xl shadow-gray-900 mask-fade-bottom">
 						<Image
-							src="https://res.cloudinary.com/drzumfcdp/image/upload/v1746738445/Landing%20Page%20Sebastian/kookoai-platform_j2ovnt.png"
+							src="https://res.cloudinary.com/drzumfcdp/image/upload/v1746739117/Landing%20Page%20Sebastian/kookoai-platform_ypt3tn.png"
 							width={1200}
 							height={900}
 							alt="kookoai-platform"
