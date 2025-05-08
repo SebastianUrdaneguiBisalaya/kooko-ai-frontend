@@ -260,7 +260,13 @@ export default function Home() {
 						Mantén el control de tus finanzas desde tu panel web
 					</h2>
 					<div className="w-full p-4 border border-gray-500 rounded-md bg-gray/20">
-
+						<Image
+							src="https://res.cloudinary.com/drzumfcdp/image/upload/v1746738445/Landing%20Page%20Sebastian/kookoai-platform_j2ovnt.png"
+							width={1200}
+							height={900}
+							alt="kookoai-platform"
+							className="rounded-md"
+						/>
 					</div>
 					<div
 						className="flex flex-col sm:flex-row gap-4 w-full"
