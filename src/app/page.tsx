@@ -27,6 +27,37 @@ const dataCardDetail = [
 	},
 ]
 
+const dataCardFeature = [
+	{
+		title: "Registrar",
+		description: "Envía tus comprobantes por Telegram, nuestra IA extrae los datos y los organiza automáticamente en tu panel web.",
+		icon: (
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23l7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3L3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" fill="#E0F15B"/></svg>
+		),
+	},
+	{
+		title: "Visualizar",
+		description: "Accede fácilmente a todos los detalles de tus comprobantes registrados y visualiza tu información financiera de forma clara.",
+		icon: (
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#E0F15B" d="M13 9V3h8v6zM3 13V3h8v10zm10 8V11h8v10zM3 21v-6h8v6z"/></svg>
+		),
+	},
+	{
+		title: "Filtrar",
+		description: "Encuentra rápidamente cualquier comprobante buscando por fecha o rango de fechas de emisión.",
+		icon: (
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="none" stroke="#E0F15B" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4h16v2.172a2 2 0 0 1-.586 1.414L15 12v7l-6 2v-8.5L4.52 7.572A2 2 0 0 1 4 6.227z"/></svg>
+		),
+	},
+	{
+		title: "Descargar",
+		description: "Exporta tus datos y las imágenes de tus comprobantes a formato Excel y PNG, respectivamente, para análisis o contabilidad.",
+		icon: (
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#E0F15B" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"/></svg>
+		),
+	},
+]
+
 export default function Home() {
 	const [isModalCredit, setIsModalCredit] = useState<boolean>(false);
 	const [isModalJoinWaitlist, setIsModalJoinWaitlist] = useState<boolean>(false);
@@ -102,7 +133,7 @@ export default function Home() {
 
 	useEffect(() => {
 		if (videoRef.current) {
-			videoRef.current.playbackRate = 2;
+			videoRef.current.playbackRate = 2.5;
 		}
 	}, []);
 
@@ -117,8 +148,11 @@ export default function Home() {
 					<span className="text-white group-hover:text-blue-dark text-base md:text-md font-medium">Iniciar Sesión</span>
 				</Link>
 			</header>
-			<main className="flex w-full h-full justify-center items-center grow">
-				<div className="flex flex-col lg:flex-row gap-6 w-full h-full py-4">
+			<main className="flex flex-col gap-14 w-full h-full justify-center items-center grow">
+				<section
+					id="hero-section"
+					className="flex flex-col lg:flex-row gap-6 w-full h-full py-4"
+				>
 					<div className="basis-[70%] flex flex-col gap-6">
 						<h1 className="text-white text-3xl sm:text-5xl font-bold animate-zoom-in">
 							¿Cansado de registrar los comprobantes manualmente?
@@ -220,9 +254,43 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
-				</div>
+				</section>
+				
+				<section
+					id="features-section"
+					className="flex flex-col gap-10 w-full h-full"
+				>
+					<h2
+						className="text-white text-xl sm:text-3xl font-semibold text-center animate-zoom-in animate-delay-[2200ms] max-w-2xl self-center"
+					>
+						Simplifica tu Gestión: Boletas y Facturas Organizadas y Accesibles
+					</h2>
+					<div className="w-full p-4 border border-gray-500 rounded-md bg-gray/20 shadow-2xl shadow-gray-900 mask-fade-bottom">
+						<Image
+							src="https://res.cloudinary.com/drzumfcdp/image/upload/v1746739117/Landing%20Page%20Sebastian/kookoai-platform_ypt3tn.png"
+							width={1200}
+							height={900}
+							alt="kookoai-platform"
+							className="rounded-md"
+						/>
+					</div>
+					<div
+						className="flex flex-col sm:flex-row gap-4 w-full"
+					>
+						{
+							dataCardFeature.map((item) => (
+								<CardFeatureLandingPage
+									key={item.title}
+									title={item.title}
+									description={item.description}
+									icon={item.icon}
+								/>
+							))
+						}
+					</div>
+				</section>
 			</main>
-			<footer className="flex flex-col sm:flex-row justify-between items-start gap-4 w-full py-4">
+			<footer className="flex flex-col sm:flex-row justify-between items-start gap-4 w-full pt-14 pb-4">
 				<div className="flex flex-row items-center justify-start gap-2 py-4">
 					<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512"><path fill="#ffffff" d="M179.125 20.625c-28.052.12-54.046 5.813-66.72 9.78c0 0 114.968 19.51 124.532 98.876C149.573 3.32 54.28 155.657 54.28 155.657c19.868-5.212 76.76-20.682 114.75-14.156c25.992 4.465 51.33 28.03 50.236 27.733c-61.943 15.24-160.35 290.92-143.64 313.308c14.9 17.12 29.816 11.28 44.718 2.595c7.376-58.425 64.938-314.765 135.375-294.072c.01.003.02-.003.03 0c5.93 2.03 11.54 5.59 11.844 11.03c.58 10.363-6.11 27.3-4.53 39.063c3.662 27.296 9.007 36.79 16.78 46.313c18.564-10.435 36.326-48.057 40-67.564c16.634 7.284 43.373 24.155 65.187 86.813c11.404-58.716-5.042-105.03-59.03-125.595c23.38-10.105 125.142 41.03 137.563 69.53C475.648 199.264 390.167 136.378 319 139.72c13.644-3.56 28.638.6 42.906-9.907c19.146-14.098 41.474-26.24 62.28-39.282c-69.972-30.435-134.545-15.407-139.092 16.095c-3.573-69.916-57.83-86.204-105.97-86z"/></svg>
 					<span className="text-white text-base sm:text-2xl font-semibold">kooko.ai</span>
